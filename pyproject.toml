@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "phzipcodes-web"
+version = "0.1.0"
+description = "Philippines Zip Codes Web Application"
+authors = ["Jayson <jsoncp@proton.me>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+phzipcodes = "^0.1.4"
+fastapi = "^0.115.4"
+jinja2 = "^3.1.4"
+uvicorn = "^0.32.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.7.2"
+mypy = "^1.13.0"
+pytest = "^8.3.3"
+
+[build-system]
+prequires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

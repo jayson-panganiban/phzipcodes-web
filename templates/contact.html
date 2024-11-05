@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Philippine Zipcodes{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+        <h1 class="welcome-title text-4xl font-bold mb-4">Get in Touch</h1>
+    </div>
+
+    <!-- Social Links -->
+    <div class="flex justify-center space-x-8 mb-8">
+        <a href="https://github.com/jayson-panganiban" target="_blank"
+            class="flex items-center text-slate-700 hover:text-purple-700 transition-colors duration-200">
+            <img src="/static/icons/github.svg" class="w-6 h-6 mr-2 filter-purple" alt="GitHub icon">
+            GitHub
+        </a>
+        <a href="https://linkedin.com/in/jayson-panganiban" target="_blank"
+            class="flex items-center text-slate-700 hover:text-purple-700 transition-colors duration-200">
+            <img src="/static/icons/linkedin.svg" class="w-6 h-6 mr-2 filter-purple" alt="LinkedIn icon">
+            LinkedIn
+        </a>
+        <a href="mailto:jsoncp@proton.me"
+            class="flex items-center text-slate-700 hover:text-purple-700 transition-colors duration-200">
+            <img src="/static/icons/email.svg" class="w-6 h-6 mr-2 filter-purple" alt="Email icon">
+            Email
+        </a>
+    </div>
+
+    <!-- Project Info -->
+    <div class="bg-white rounded-lg shadow-lg p-8 border border-slate-100 mb-8">
+        <h2 class="text-xl font-semibold text-slate-800 mb-4">About PH Zipcodes</h2>
+        <p class="text-slate-600 mb-4">
+            PH Zipcodes helps you find zip codes across the Philippines with ease. The data comes straight from
+            PHLPost (Philippine Postal Corporation), which is the official postal service of the Philippines.
+        </p>
+        <p class="text-slate-600 mb-4">
+            Whether you're sending packages, filling out forms, or just need to know a postal code - I've got you
+            covered with a clean, fast, and reliable search experience.
+        </p>
+        <div class="bg-purple-50 rounded-lg p-4">
+            <p class="text-purple-700 text-sm">
+                Got suggestions or spotted something that needs updating? Reach out through my social links!
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

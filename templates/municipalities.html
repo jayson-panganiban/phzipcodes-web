@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Cities & Municipalities - Philippine Zipcodes{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-6">
+        <h1
+            class="welcome-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 text-transparent bg-clip-text">
+            Cities & Municipalities
+        </h1>
+        <p class="text-slate-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto py-2">
+            Find zip codes for all cities and municipalities
+        </p>
+        <!-- Mobile scrollable pills -->
+        <div class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide">
+            <div class="inline-flex space-x-2">
+                <button
+                    class="px-4 py-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700 font-medium whitespace-nowrap"
+                    hx-get=" /api/municipalities/search" hx-target="#municipalities-grid" hx-include="[name='q']">
+                    All Provinces
+                </button>
+
+                {% for province in provinces %}
+                <button
+                    class="px-4 py-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700 font-medium whitespace-nowrap"
+                    hx-get="/api/municipalities/search" hx-target="#municipalities-grid" hx-include="[name='q']"
+                    hx-vals='{"province": "{{ province }}"}'>
+                    {{ province }}
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Desktop search and select -->
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-2">
+            <div class="relative w-full sm:w-96 lg:w-[32rem]">
+                <input name="q" placeholder="Enter city or municipality name..."
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 outline-none text-base pl-10 text-slate-600 placeholder:text-slate-400 placeholder:text-sm"
+                    hx-get="/api/municipalities/search"
+                    hx-trigger="keyup changed delay:300ms, province-changed from:body" hx-target="#municipalities-grid"
+                    hx-include="[name='province']" name="q">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <img src="/static/icons/magnifying-glass.svg" class="h-5 w-5 text-purple-400 filter-purple"
+                        alt="Search" />
+                </div>
+                <button class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" onclick="this.previousElementSibling.previousElementSibling.value = ''; 
+                    htmx.trigger(this.previousElementSibling.previousElementSibling, 'keyup')">
+                    <img src="/static/icons/backspace.svg" class="h-5 w-5 filter-purple hover:opacity-75"
+                        alt="Clear search" />
+                </button>
+            </div>
+            <!-- Hide select on mobile since we have pills -->
+            <select
+                class="hidden sm:block w-full sm:w-auto px-4 py-3 rounded-xl border border-slate-200 focus:border-purple-400 outline-none text-base bg-white text-slate-600 font-normal"
+                name="province" hx-trigger="change" hx-get="/api/municipalities/search" hx-target="#municipalities-grid"
+                hx-include="[name='q']">
+                <option value="">All Provinces</option>
+                {% for province in provinces %}
+                <option value="{{ province }}" {% if province==selected_province %}selected{% endif %}>{{ province }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div id="municipalities-grid">
+        {% include "components/municipalities_grid.html" %}
+    </div>
+</div>
+
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
+<script>
+    document.addEventListener('htmx:afterSwap', function (evt) {
+        if (evt.detail.target.id === 'municipalities-grid') {
+            window.scrollTo({ top: evt.detail.target.offsetTop - 100, behavior: 'smooth' });
+        }
+    });
+
+    document.querySelector('select[name="province"]').addEventListener('change', function (e) {
+        if (e.target.value === '') {
+            htmx.trigger(this, 'change');
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% if provinces %}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3">
+    {% for province in provinces|sort %}
+    <a href="/municipalities?province={{ province|urlencode }}"
+        class="transform hover:scale-[1.02] transition-all duration-300 ease-in-out">
+        <div class="h-full bg-white rounded-xl shadow-sm hover:shadow-xl p-4 sm:p-6 border border-slate-100 
+            hover:border-purple-300 group hover:bg-gradient-to-r from-purple-50 to-white 
+            transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+            <div class="flex items-center justify-between cursor-pointer">
+                <h3
+                    class="text-xl sm:text-2xl font-medium text-slate-800 group-hover:text-purple-600 transition-colors">
+                    {{ province }}</h3>
+                <span class="text-purple-500 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <img src="/static/icons/caret-right.svg" class="w-5 h-5 mr-1 filter-purple">
+                </span>
+            </div>
+            <div class="mt-4 flex items-center text-xs text-slate-400 group-hover:text-purple-500 transition-colors">
+                <img src="/static/icons/map-pin.svg" class="w-4 h-4 mr-1 filter-purple">
+                <span>Explore cities and municipalities</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-4">
+    <div class="bg-white rounded-xl shadow-sm p-8 max-w-2xl mx-auto border border-slate-100">
+        <img src="/static/icons/magnifying-glass.svg" class="w-12 h-12 mx-auto mb-4 filter-purple opacity-50"
+            alt="No results">
+        <h3 class="text-xl font-medium text-slate-700 mb-2">
+            No provinces found
+        </h3>
+        <p class="text-slate-500">
+            Try adjusting your search or select a different region
+        </p>
+    </div>
+</div>
+{% endif %}

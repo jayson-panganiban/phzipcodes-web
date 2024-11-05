@@ -5,11 +5,9 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.config import settings
-from app.routers.views import router
+from app.views import router
 
-app: FastAPI = FastAPI(
-    title=settings.APP_NAME, version=settings.API_VERSION, debug=settings.DEBUG
-)
+app: FastAPI = FastAPI(title=settings.APP_NAME, debug=settings.DEBUG)
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.ALLOWED_HOSTS)
@@ -40,7 +38,7 @@ async def health_check() -> dict:
 
 @app.on_event("startup")
 async def startup_event() -> None:
-    print(f"\n🚀 Launching {settings.APP_NAME} v{settings.API_VERSION}")
+    print(f"\n🚀 Launching {settings.APP_NAME}")
 
 
 @app.on_event("shutdown")

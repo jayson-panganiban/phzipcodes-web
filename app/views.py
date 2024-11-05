@@ -2,7 +2,7 @@ from collections.abc import Sequence
 from typing import TypedDict
 
 import phzipcodes
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from phzipcodes import ZipCode
@@ -25,7 +25,7 @@ async def home(request: Request) -> HTMLResponse:
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@router.get("/api/search", response_class=HTMLResponse)
+@router.get("/search", response_class=HTMLResponse)
 async def search_zipcodes(request: Request, q: str = "") -> HTMLResponse:
     """Search zipcodes by query string."""
     results: list[ZipCode] = []
@@ -43,21 +43,6 @@ async def search_zipcodes(request: Request, q: str = "") -> HTMLResponse:
     )
 
 
-@router.get(
-    "/api/details/{zipcode}",
-    response_model=ZipCode,
-    responses={404: {"description": "Zipcode not found"}},
-)
-async def get_zipcode_details(zipcode: str) -> ZipCode:
-    """Get detailed information for a specific zipcode."""
-    result = phzipcodes.find_by_zip(zipcode)
-    if result:
-        return result
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND, detail="Zipcode not found"
-    )
-
-
 @router.get("/regions", response_class=HTMLResponse)
 async def regions_page(request: Request) -> HTMLResponse:
     """Render regions page with all Philippine regions."""
@@ -71,7 +56,7 @@ async def regions_page(request: Request) -> HTMLResponse:
     )
 
 
-@router.get("/api/regions/search", response_class=HTMLResponse)
+@router.get("/regions/search", response_class=HTMLResponse)
 async def search_regions(request: Request, q: str = "") -> HTMLResponse:
     """Search and filter regions."""
     regions: list[str] = phzipcodes.get_regions()
@@ -86,9 +71,13 @@ async def search_regions(request: Request, q: str = "") -> HTMLResponse:
 async def provinces_page(request: Request, region: str = "") -> HTMLResponse:
     """Render provinces page with all Philippine provinces."""
     provinces: list[str] = []
-    regions: list[str] = phzipcodes.get_regions()
-    for region in regions:
-        provinces.extend([p for p in phzipcodes.get_provinces(region)])
+    regions = phzipcodes.get_regions()
+
+    if region:
+        provinces = phzipcodes.get_provinces(region)
+    else:
+        for r in regions:
+            provinces.extend(p for p in phzipcodes.get_provinces(r) if p)
 
     return templates.TemplateResponse(
         "provinces.html",
@@ -96,22 +85,22 @@ async def provinces_page(request: Request, region: str = "") -> HTMLResponse:
             "request": request,
             "provinces": set(provinces),
             "regions": regions,
-            "selected_region": region,
         },
     )
 
 
-@router.get("/api/provinces/search", response_class=HTMLResponse)
+@router.get("/provinces/search", response_class=HTMLResponse)
 async def search_provinces(
     request: Request, q: str = "", region: str = ""
 ) -> HTMLResponse:
     """Search and filter provinces by name and region."""
     provinces: list[str] = []
+
     if region:
-        provinces.extend([p for p in phzipcodes.get_provinces(region) if p])
+        provinces = phzipcodes.get_provinces(region)
     else:
         for r in phzipcodes.get_regions():
-            provinces.extend([p for p in phzipcodes.get_provinces(r) if p])
+            provinces.extend(p for p in phzipcodes.get_provinces(r) if p)
 
     if q:
         provinces = [p for p in provinces if q.lower() in p.lower()]
@@ -158,7 +147,7 @@ async def municipalities_page(request: Request, province: str = "") -> HTMLRespo
     )
 
 
-@router.get("/api/municipalities/search", response_class=HTMLResponse)
+@router.get("/municipalities/search", response_class=HTMLResponse)
 async def search_municipalities(
     request: Request, q: str = "", province: str = ""
 ) -> HTMLResponse:

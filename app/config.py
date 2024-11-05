@@ -8,7 +8,6 @@ class Settings(BaseModel):
     # App settings
     APP_NAME: str = "Philippine Zipcodes"
     DEBUG: bool = True
-    API_VERSION: str = "1.0.0"
 
     # Security settings
     ALLOWED_HOSTS: List[str] = Field(default=["*"])

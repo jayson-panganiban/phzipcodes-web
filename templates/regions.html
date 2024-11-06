@@ -5,38 +5,28 @@
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-6">
-        <h1
-            class="welcome-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 text-transparent bg-clip-text">
+        <h2
+            class="welcome-title text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 text-transparent bg-clip-text">
             Philippine Regions
-        </h1>
-        <p
-            class="text-slate-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto">
+        </h2>
+        <p class="text-slate-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto">
             Explore the diverse regions of the Philippines, from Luzon to
             Mindanao
         </p>
         <!-- search and select -->
         <div class="mt-6 sm:mt-8 max-w-2xl mx-auto">
             <div class="relative">
-                <input type="text" name="q" placeholder="Search regions..."
-                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-purple-100 focus:border-purple-500 
+                <input type="text" name="q" placeholder="Search regions..." class="w-full pl-10 pr-4 py-3 rounded-lg border border-purple-100 focus:border-purple-500 
                 focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all duration-300 
                 shadow-sm hover:shadow-md bg-white placeholder-slate-400 hover:border-purple-300"
-                    hx-get="/regions/search"
-                    hx-trigger="keyup changed delay:300ms"
-                    hx-target="#regions-grid"
-                    name="q">
-                <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <img src="/static/icons/magnifying-glass.svg"
-                        class="h-5 w-5 text-purple-400 filter-purple"
+                    hx-get="/regions/search" hx-trigger="keyup changed delay:300ms" hx-target="#regions-grid" name="q">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <img src="/static/icons/magnifying-glass.svg" class="h-5 w-5 text-purple-400 filter-purple"
                         alt="Search" />
                 </div>
-                <button
-                    class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                    onclick="this.previousElementSibling.previousElementSibling.value = ''; 
+                <button class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" onclick="this.previousElementSibling.previousElementSibling.value = ''; 
                 htmx.trigger(this.previousElementSibling.previousElementSibling, 'keyup')">
-                    <img src="/static/icons/backspace.svg"
-                        class="h-5 w-5 filter-purple hover:opacity-75"
+                    <img src="/static/icons/backspace.svg" class="h-5 w-5 filter-purple hover:opacity-75"
                         alt="Clear search" />
                 </button>
             </div>

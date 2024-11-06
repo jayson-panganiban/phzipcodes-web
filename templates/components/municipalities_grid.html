@@ -1,33 +1,26 @@
 {% if municipalities %}
-<div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3"
-    id="municipalities">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3" id="municipalities">
     {% for municipality in municipalities%}
-    <div
-        class="h-full bg-white rounded-xl shadow-sm hover:shadow-xl p-4 sm:p-6 border border-slate-100 
+    <div class="h-full bg-white rounded-xl shadow-sm hover:shadow-xl p-4 sm:p-6 border border-slate-100 
     hover:border-purple-300 group hover:bg-gradient-to-r from-purple-50 to-white 
     transition-all duration-300 ease-in-out transform hover:-translate-y-1">
         <div class="flex items-center justify-between cursor-pointer">
             <h3
                 class="text-lg sm:text-xl lg:text-2xl font-medium text-slate-800 group-hover:text-purple-600 transition-colors">
                 {{ municipality.name }}</h3>
-            <span
-                class="text-purple-500 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <img src="/static/icons/caret-right.svg"
-                    class="w-5 h-5 mr-1 filter-purple">
+            <span class="text-purple-500 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <img src="/static/icons/caret-right.svg" class="w-5 h-5 mr-1 filter-purple">
             </span>
         </div>
         <div class="flex flex-wrap justify-between gap-2 mt-auto pt-4">
             <span
                 class="text-xs bg-slate-50 rounded-full text-slate-600 flex items-center hover:bg-slate-100 transition-colors">
-                <img src="/static/icons/map-pin.svg"
-                    class="w-4 h-4 mr-1 filter-purple">
+                <img src="/static/icons/map-trifold.svg" class="w-4 h-4 mr-1 filter-purple">
                 {{ municipality.province }}
             </span>
             <span
                 class="text-xs px-3 py-1 bg-purple-50 rounded-full text-purple-600 flex items-center hover:bg-purple-100 transition-colors">
-                <img src="/static/icons/mailbox.svg"
-                    class="w-4 h-4 mr-1 filter-purple">
+                <img src="/static/icons/map-pin.svg" class="w-4 h-4 mr-1 filter-purple">
                 {{ municipality.zipcode }}
             </span>
         </div>
@@ -36,10 +29,8 @@
 </div>
 {% else %}
 <div class="text-center py-4">
-    <div
-        class="bg-white rounded-xl shadow-sm p-8 max-w-2xl mx-auto border border-slate-100">
-        <img src="/static/icons/magnifying-glass.svg"
-            class="w-12 h-12 mx-auto mb-4 filter-purple opacity-50"
+    <div class="bg-white rounded-xl shadow-sm p-8 max-w-2xl mx-auto border border-slate-100">
+        <img src="/static/icons/magnifying-glass.svg" class="w-12 h-12 mx-auto mb-4 filter-purple opacity-50"
             alt="No results">
         <h3 class="text-xl font-medium text-slate-700 mb-2">
             No city or municipality found

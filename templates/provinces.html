@@ -5,32 +5,26 @@
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-6">
-        <h1
-            class="welcome-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 text-transparent bg-clip-text">
+        <h2
+            class="welcome-title text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 text-transparent bg-clip-text">
             Philippine Provinces
-        </h1>
-        <p
-            class="text-slate-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-2">
+        </h2>
+        <p class="text-slate-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-2">
             Discover all provinces across the Philippine archipelago
         </p>
         <!-- Mobile scrollable pills -->
-        <div
-            class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide">
+        <div class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide">
             <div class="inline-flex space-x-2">
                 <button
                     class="px-4 py-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700 font-medium whitespace-nowrap focus:bg-purple-100 focus:text-purple-700"
-                    hx-get="/provinces/search"
-                    hx-target="#provinces-grid"
-                    hx-include="[name='q']">
+                    hx-get="/provinces/search" hx-target="#provinces-grid" hx-include="[name='q']">
                     All Regions
                 </button>
 
                 {% for region in regions %}
                 <button
                     class="px-4 py-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700 font-medium whitespace-nowrap focus:bg-purple-100 focus:text-purple-700"
-                    hx-get="/provinces/search"
-                    hx-target="#provinces-grid"
-                    hx-include="[name='q']"
+                    hx-get="/provinces/search" hx-target="#provinces-grid" hx-include="[name='q']"
                     hx-vals='{"region": "{{ region }}"}'>
                     {{ region }}
                 </button>
@@ -39,36 +33,27 @@
         </div>
 
         <!-- Desktop search and select -->
-        <div
-            class="flex flex-col sm:flex-row justify-center items-center gap-2">
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-2">
             <div class="relative w-full sm:w-96 lg:w-[32rem]">
                 <input name="q" placeholder="Enter province name..."
                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 outline-none text-base pl-10 text-slate-600 placeholder:text-slate-400 placeholder:text-sm"
-                    hx-get="/provinces/search"
-                    hx-trigger="keyup changed delay:300ms, region-changed from:body"
-                    hx-target="#provinces-grid" hx-include="[name='region']"
-                    name="q">
-                <div
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <img src="/static/icons/magnifying-glass.svg"
-                        class="h-5 w-5 text-purple-400 filter-purple"
+                    hx-get="/provinces/search" hx-trigger="keyup changed delay:300ms, region-changed from:body"
+                    hx-target="#provinces-grid" hx-include="[name='region']" name="q">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <img src="/static/icons/magnifying-glass.svg" class="h-5 w-5 text-purple-400 filter-purple"
                         alt="Search" />
                 </div>
-                <button
-                    class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                    onclick="this.previousElementSibling.previousElementSibling.value = ''; 
+                <button class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" onclick="this.previousElementSibling.previousElementSibling.value = ''; 
                     htmx.trigger(this.previousElementSibling.previousElementSibling, 'keyup');
                     document.querySelector('select[name=region]').value = '';
                     htmx.trigger('select[name=region]', 'change')">
-                    <img src="/static/icons/backspace.svg"
-                        class="h-5 w-5 filter-purple hover:opacity-75"
+                    <img src="/static/icons/backspace.svg" class="h-5 w-5 filter-purple hover:opacity-75"
                         alt="Clear search" />
                 </button>
             </div>
             <select
                 class="hidden sm:block w-full sm:w-auto px-4 py-3 rounded-xl border border-slate-200 focus:border-purple-400 outline-none text-base bg-white text-slate-600 font-normal"
-                name="region" hx-trigger="change" hx-get="/provinces/search"
-                hx-target="#provinces-grid"
+                name="region" hx-trigger="change" hx-get="/provinces/search" hx-target="#provinces-grid"
                 hx-include="[name='q']">
                 <option value>All Regions</option>
                 {% for region in regions %}
@@ -81,8 +66,7 @@
         {% include "components/provinces_grid.html" %}
     </div>
     <!-- Municipalities Section -->
-    <div id="municipalities-section"
-        class="mt-8 transition-all duration-300">
+    <div id="municipalities-section" class="mt-8 transition-all duration-300">
     </div>
 </div>
 

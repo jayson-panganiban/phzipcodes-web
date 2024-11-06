@@ -1,47 +1,46 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
 <div class="max-w-3xl mx-auto">
     <!-- Welcome Section -->
     <div class="text-center mt-2 mb-8 transition-all duration-300">
         <div class="text-6xl mb-6">🏠</div>
-        <p
-            class="text-slate-600 text-lg hover:text-purple-600 transition-colors">
-            Find zip codes for any location in the Philippines
-        </p>
-        <div class="flex justify-center space-x-6 mt-4">
+        <h1 class="welcome-title text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+            Philippine Zip Codes Lookup
+        </h1>
+
+        <div class="flex justify-center space-x-6 mt-6">
             <a href="/regions"
                 class="text-sm text-slate-500 hover:text-purple-600 transition-all duration-300 flex items-center transform hover:translate-x-1">
                 <img src="/static/icons/map-trifold.svg"
-                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110"
-                    alt="Regions">
+                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110" alt="Regions">
                 Regions
             </a>
             <a href="/provinces"
                 class="text-sm text-slate-500 hover:text-purple-600 transition-all duration-300 flex items-center transform hover:translate-x-1">
                 <img src="/static/icons/island.svg"
-                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110"
-                    alt="Provinces">
+                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110" alt="Provinces">
                 Provinces
             </a>
             <a href="/municipalities"
                 class="text-sm text-slate-500 hover:text-purple-600 transition-all duration-300 flex items-center transform hover:translate-x-1">
                 <img src="/static/icons/city.svg"
-                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110"
-                    alt="Municipalities">
+                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110" alt="Municipalities">
                 Cities & Municipalities
             </a>
         </div>
     </div>
+
     <!-- Search Box -->
     <div
         class="bg-white rounded-lg shadow-lg p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:border-purple-200">
         {% include "components/search.html" %}
     </div>
+
     <!-- Quick Tips -->
     <div class="mt-6 text-center">
-        <p
-            class="text-sm text-slate-500 italic hover:text-purple-600 transition-colors cursor-help">
-            Quick Tip: Search by city name, municipality, province, region, or
-            zipcode
+        <p class="text-sm text-slate-500 italic hover:text-purple-600 transition-colors cursor-help">
+            Quick Tip: Search by city name, municipality, province, region, or zipcode
         </p>
     </div>
 </div>

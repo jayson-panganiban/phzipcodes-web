@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
@@ -33,81 +32,25 @@
 
     <title>{% block title %}Philippine Zipcodes{% endblock %}</title>
 
-    <!-- Preload Critical Resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preload" as="style" href="/static/css/styles.css">
-
     <!-- Scripts and Styles -->
-    <script src="https://unpkg.com/htmx.org@1.9.6" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/htmx.min.js" defer></script>
+    <link href="/static/css/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/fonts.css">
+
     {% block head %}{% endblock %}
 </head>
 
-<body class="bg-slate-50 min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50">
-        <nav class="bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white shadow-lg relative overflow-hidden transition-all duration-300 hover:shadow-xl"
-            style="background: linear-gradient(87.54deg, #062d2e -6.8%, #390660 84.14%)">
-            <div class="container mx-auto relative">
-                <div class="flex items-center justify-between">
-                    <a href="/" class="flex items-center group transition-transform duration-300 hover:scale-105">
-                        <img src="/static/icons/philippines.svg"
-                            class="w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 group-hover:scale-110 filter-white"
-                            alt="Philippines">
-                        <span class="text-white relative group text-2xl sm:text-3xl font-bold tracking-tight">
-                            PH Zipcodes
-                            <span
-                                class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-white to-transparent transform origin-left transition-all duration-300 scale-x-0 group-hover:scale-x-100"></span>
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
+<body class="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-slate-50/80">
+    {% include 'components/header.html' %}
 
+    <!-- <main class="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8"> -->
     <main class="container mx-auto px-4 py-6 lg:py-8 flex-grow">
-        <div class="max-w-4xl mx-auto">
-            {% block content %}{% endblock %}
-        </div>
+        {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-gradient-to-r from-slate-50 to-purple-50 border-t border-slate-200">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex items-center justify-between">
-                <div class="text-slate-700 text-sm font-medium hover:text-purple-600 transition-colors">
-                    &copy; 2024 PHZipcodes
-                </div>
-                <nav class="flex space-x-6">
-                    <a href="/"
-                        class="text-sm text-slate-600 hover:text-purple-700 transition-all duration-300 transform hover:translate-x-1">Home</a>
-                    <a href="/contact"
-                        class="text-sm text-slate-600 hover:text-purple-700 transition-all duration-300 transform hover:translate-x-1">Contact</a>
-                </nav>
-            </div>
-        </div>
-    </footer>
-
-    <button id="backToTop"
-        class="fixed bottom-4 right-4 bg-purple-600 text-white p-2 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-purple-700 hover:scale-110 focus:outline-none"
-        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-    </button>
-
-    <script>
-        window.onscroll = function () {
-            const button = document.getElementById('backToTop');
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                button.classList.remove('opacity-0', 'invisible');
-                button.classList.add('opacity-100', 'visible');
-            } else {
-                button.classList.remove('opacity-100', 'visible');
-                button.classList.add('opacity-0', 'invisible');
-            }
-        };
-    </script>
+    {% include 'components/footer.html' %}
+    {% include 'components/back_to_top.html' %}
 </body>
+
 
 </html>

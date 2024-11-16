@@ -1,47 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto">
-    <!-- Welcome Section -->
-    <div class="text-center mt-2 mb-8 transition-all duration-300">
-        <div class="text-6xl mb-6">🏠</div>
-        <h1 class="welcome-title text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
-            Philippine Zip Codes Lookup
+<div class="flex items-center justify-center overflow-y-auto">
+    <div class="max-w-4xl w-full mx-auto text-center px-4 mt-8">
+        <h1 class="text-3xl sm:text-4xl lg:text-6xl">
+            Find Philippines Zip Codes
         </h1>
-
-        <div class="flex justify-center space-x-6 mt-6">
+        <div
+            class="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-lg mx-auto mt-8"
+            id="categories">
             <a href="/regions"
-                class="text-sm text-slate-500 hover:text-purple-600 transition-all duration-300 flex items-center transform hover:translate-x-1">
-                <img src="/static/icons/map-trifold.svg"
-                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110" alt="Regions">
-                Regions
+                class="p-3 sm:p-4 flex flex-col items-center rounded-xl shadow-sm hover:shadow-lg border">
+                <img src="/static/icons/island-duotone.svg"
+                    class="w-5 h-5 sm:w-6 sm:h-6 mb-2 sm:mb-3 opacity-80"
+                    alt="Regions">
+                <span
+                    class="text-slate-600 font-light tracking-wide">Regions</span>
             </a>
             <a href="/provinces"
-                class="text-sm text-slate-500 hover:text-purple-600 transition-all duration-300 flex items-center transform hover:translate-x-1">
-                <img src="/static/icons/island.svg"
-                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110" alt="Provinces">
-                Provinces
+                class="p-3 sm:p-4 flex flex-col items-center rounded-xl shadow-sm hover:shadow-lg border">
+                <img src="/static/icons/map-trifold-duotone.svg"
+                    class="w-5 h-5 sm:w-6 sm:h-6 mb-2 sm:mb-3 opacity-80"
+                    alt="Provinces">
+                <span
+                    class="text-slate-600 font-light tracking-wide">Provinces</span>
             </a>
             <a href="/municipalities"
-                class="text-sm text-slate-500 hover:text-purple-600 transition-all duration-300 flex items-center transform hover:translate-x-1">
-                <img src="/static/icons/city.svg"
-                    class="w-4 h-4 mr-1 filter-purple transition-transform hover:scale-110" alt="Municipalities">
-                Cities & Municipalities
+                class="p-3 sm:p-4 flex flex-col items-center rounded-xl shadow-sm hover:shadow-lg border">
+                <img src="/static/icons/city-duotone.svg"
+                    class="w-5 h-5 sm:w-6 sm:h-6 mb-2 sm:mb-3 opacity-80"
+                    alt="Cities">
+                <span
+                    class="text-slate-600 font-light tracking-wide">Cities</span>
             </a>
         </div>
-    </div>
 
-    <!-- Search Box -->
-    <div
-        class="bg-white rounded-lg shadow-lg p-6 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:border-purple-200">
-        {% include "components/search.html" %}
-    </div>
+        <div class="search-container max-w-4xl mx-auto mt-8">
+            {% include "components/search.html" %}
+        </div>
 
-    <!-- Quick Tips -->
-    <div class="mt-6 text-center">
-        <p class="text-sm text-slate-500 italic hover:text-purple-600 transition-colors cursor-help">
-            Quick Tip: Search by city name, municipality, province, region, or zipcode
-        </p>
+        <div class="mt-8 p-3 max-w-xl mx-auto">
+            <div class="flex items-start gap-2">
+                <img src="/static/icons/lightbulb-light.svg"
+                    class="w-4 h-4 mt-0.5 opacity-70" alt="Tip">
+                <div class="text-left">
+                    <h3 class="text-xs">Quick Tip</h3>
+                    <p class="mt-1 text-xs text-slate-600 font-light italic">
+                        Try searching by city name, municipality, or directly
+                        enter a zip code (e.g. 4117) to find
+                        locations.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

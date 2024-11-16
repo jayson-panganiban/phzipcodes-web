@@ -3,52 +3,47 @@
 {% block title %}Contact - Philippine Zipcodes{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto">
-    <div class="text-center mb-8">
-        <h1 class="welcome-title text-4xl font-bold mb-4">Get in Touch</h1>
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <div class="text-center mb-8 sm:mb-12 animate-fadeIn">
+        <h1
+            class="text-3xl sm:text-4xl lg:text-5xl font-light mb-4 tracking-tight bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text">
+            Get in Touch
+        </h1>
     </div>
 
-    <!-- Social Links -->
-    <div class="flex justify-center space-x-8 mb-8">
-        <a href="https://github.com/jayson-panganiban" target="_blank"
-            class="flex items-center text-slate-700 hover:text-purple-700 transition-colors duration-200">
-            <img src="/static/icons/github.svg" class="w-6 h-6 mr-2 filter-purple" alt="GitHub icon">
-            GitHub
-        </a>
-        <a href="https://linkedin.com/in/jayson-panganiban" target="_blank"
-            class="flex items-center text-slate-700 hover:text-purple-700 transition-colors duration-200">
-            <img src="/static/icons/linkedin.svg" class="w-6 h-6 mr-2 filter-purple" alt="LinkedIn icon">
-            LinkedIn
-        </a>
-        <a href="mailto:jsoncp@proton.me"
-            class="flex items-center text-slate-700 hover:text-purple-700 transition-colors duration-200">
-            <img src="/static/icons/email.svg" class="w-6 h-6 mr-2 filter-purple" alt="Email icon">
-            Email
-        </a>
-    </div>
-
-    <!-- Project Info -->
-    <div class="bg-white rounded-lg shadow-lg p-8 border border-slate-100 mb-8">
-        <h2 class="text-xl font-semibold text-slate-800 mb-4">About PH
-            Zipcodes</h2>
-        <p class="text-slate-600 mb-4">
-            PH Zipcodes helps you find zip codes across the Philippines with
-            ease. The data comes straight from
-            PHLPost (Philippine Postal Corporation), which is the official
-            postal service of the Philippines.
-        </p>
-        <p class="text-slate-600 mb-4">
-            Whether you're sending packages, filling out forms, or just need to
-            know a postal code - I've got you
-            covered with a clean, fast, and reliable search experience.
-        </p>
-        <div class="bg-purple-50 rounded-lg p-4">
-            <p class="text-purple-700 text-sm">
-                Got suggestions or spotted something that needs updating? Reach
-                out through my social links!
+    <div
+        class="bg-white/95 backdrop-blur-sm rounded-xl shadow-sm p-8 sm:p-10 border border-slate-100 mb-8 hover:scale-[1.01] hover:shadow-lg">
+        <h2 class="text-xl font-semibold text-slate-800 mb-6">About PH Zipcodes</h2>
+        <div class="space-y-6 text-slate-600 font-light leading-relaxed">
+            <p class="transform transition-all duration-300">
+                PH Zipcodes helps you find zip codes across the Philippines with ease. The data comes directly from
+                PHLPost
+                (Philippine Postal Corporation), the official postal service of the Philippines.
+            </p>
+            <p class="transform transition-all duration-300">
+                Whether you're sending packages, filling out forms, or just need to know a postal code - we provide a
+                clean,
+                fast, and reliable search experience.
             </p>
         </div>
     </div>
-</div>
 
+    <div class="flex justify-center space-x-8">
+        <a href="https://github.com/jayson-panganiban" target="_blank"
+            class="flex items-center px-4 py-2 rounded-lg bg-white/90 border border-slate-100 hover:border-slate-200 hover:shadow-md ">
+            <img src="/static/icons/github-logo-light.svg" class="w-5 h-5 mr-2" alt="GitHub">
+            <span class="font-light">GitHub</span>
+        </a>
+        <a href="mailto:jsoncp@proton.me"
+            class="flex items-center px-4 py-2 rounded-lg bg-white/90 border border-slate-100 hover:border-slate-200 hover:shadow-md">
+            <img src="/static/icons/envelope-light.svg" class="w-5 h-5 mr-2" alt="Email">
+            <span class="font-light">Email</span>
+        </a>
+        <a href="https://linkedin.com/in/jayson-panganiban" target="_blank"
+            class="flex items-center px-4 py-2 rounded-lg bg-white/90 border border-slate-100 hover:border-slate-200 hover:shadow-md ">
+            <img src="/static/icons/linkedin-logo-light.svg" class="w-5 h-5 mr-2" alt="LinkedIn">
+            <span class="font-light">LinkedIn</span>
+        </a>
+    </div>
+</div>
 {% endblock %}

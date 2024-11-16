@@ -3,91 +3,91 @@
 {% block title %}Cities & Municipalities - Philippine Zipcodes{% endblock %}
 
 {% block content %}
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-6">
-        <h2
-            class="welcome-title text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 text-transparent bg-clip-text">
-            Cities & Municipalities
-        </h2>
-        <p class="text-slate-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto py-2">
-            Find zip codes for all cities and municipalities
-        </p>
-        <!-- Mobile scrollable pills -->
-        <div class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide">
-            <div class="inline-flex space-x-2">
-                <button
-                    class="px-4 py-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700 font-medium whitespace-nowrap focus:bg-purple-100 focus:text-purple-700"
-                    hx-get=" /municipalities/search" hx-target="#municipalities-grid" hx-include="[name='q']">
-                    All Provinces
-                </button>
-
-                {% for province in provinces %}
-                <button
-                    class="px-4 py-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700 font-medium whitespace-nowrap focus:bg-purple-100 focus:text-purple-700"
-                    hx-get="/municipalities/search" hx-target="#municipalities-grid" hx-include="[name='q']"
-                    hx-vals='{"province": "{{ province }}"}'>
-                    {{ province }}
-                </button>
-                {% endfor %}
-            </div>
+<div class="text-center max-w-6xl mx-auto" id="municipalities-page">
+    <h2
+        class="text-xl sm:text-2xl lg:text-3xl font-medium mb-4">
+        Philippine Cities & Municipalities
+    </h2>
+    <p class="max-w-2xl mx-auto font-light text-lg mb-4">
+        Discover postal codes across cities and municipalities
+    </p>
+    <div
+        class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide mb-3 -mx-4 px-4">
+        <div class="inline-flex space-x-2">
+            <button
+                class="px-4 py-2 rounded-full bg-gray-100 font-light whitespace-nowrap"
+                hx-get="/municipalities/search" hx-target="#municipalities-grid"
+                hx-include="[name='q']">
+                All Provinces
+            </button>
+            {% for province in provinces %}
+            <button
+                class="px-4 py-2 rounded-full bg-gray-100 font-light whitespace-nowrap"
+                hx-get="/municipalities/search" hx-target="#municipalities-grid"
+                hx-include="[name='q']"
+                hx-vals='{"province": "{{ province }}"}'>
+                {{ province }}
+            </button>
+            {% endfor %}
         </div>
-        <!-- Desktop search and select -->
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-2">
-            <div class="relative w-full sm:w-96 lg:w-[32rem]">
-                <input name="q" placeholder="Enter city or municipality name..."
-                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 outline-none text-base pl-10 text-slate-600 placeholder:text-slate-400 placeholder:text-sm"
-                    hx-get="/municipalities/search" hx-trigger="keyup changed delay:300ms, province-changed from:body"
-                    hx-target="#municipalities-grid" hx-include="[name='province']" name="q">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <img src="/static/icons/magnifying-glass.svg" class="h-5 w-5 text-purple-400 filter-purple"
-                        alt="Search" />
-                </div>
-                <button class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" onclick="this.previousElementSibling.previousElementSibling.value = ''; 
-                    htmx.trigger(this.previousElementSibling.previousElementSibling, 'keyup')">
-                    <img src="/static/icons/backspace.svg" class="h-5 w-5 filter-purple hover:opacity-75"
-                        alt="Clear search" />
-                </button>
+    </div>
+    <div
+        class="flex flex-col sm:flex-row justify-center items-center gap-2">
+        <div class="relative w-full sm:w-96 lg:w-[32rem]" id="search-container">
+            <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <img src="/static/icons/magnifying-glass-light.svg"
+                    class="h-5 w-5" alt="Search" />
             </div>
-            <!-- Hide select on mobile since we have pills -->
+            <input type="text" name="q"
+                placeholder="Search cities or municipalities..."
+                class="w-full pl-10 pr-16 py-3 font-light rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300"
+                hx-get="/municipalities/search"
+                hx-trigger="keyup changed delay:300ms"
+                hx-target="#municipalities-grid"
+                hx-include="[name='province']">
+            <button
+                class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer"
+                id="clear-search"
+                onclick="clearSearch(this)">
+                <img src="/static/icons/backspace-light.svg"
+                    class="h-5 w-5 opacity-75" alt="Clear" />
+            </button>
+        </div>
+        <div class="hidden sm:block relative w-full sm:w-auto"
+            id="select-container">
             <select
-                class="hidden sm:block w-full sm:w-auto px-4 py-3 rounded-xl border border-slate-200 focus:border-purple-400 outline-none text-base bg-white text-slate-600 font-normal"
-                name="province" hx-trigger="change" hx-get="/municipalities/search" hx-target="#municipalities-grid"
+                class="appearance-none px-6 py-3 font-light rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300"
+                name="province" hx-get="/municipalities/search"
+                hx-trigger="change" hx-target="#municipalities-grid"
                 hx-include="[name='q']">
                 <option value>All Provinces</option>
                 {% for province in provinces %}
-                <option value="{{ province }}" {% if province==selected_province %}selected{% endif %}>{{ province }}
+                <option value="{{ province }}" {% if
+                    province==selected_province %}selected{% endif %}>
+                    {{ province }}
                 </option>
                 {% endfor %}
             </select>
+            <div
+                class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none">
+                <img src="/static/icons/caret-down-light.svg"
+                    class="h-6 w-6 opacity-70" alt="Select" />
+            </div>
         </div>
+
     </div>
-    <div id="municipalities-grid">
+    <div id="municipalities-grid" class="mt-4">
         {% include "components/municipalities_grid.html" %}
     </div>
 </div>
-
-<style>
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-</style>
-
 <script>
-    document.addEventListener('htmx:afterSwap', function (evt) {
-        if (evt.detail.target.id === 'municipalities-grid') {
-            window.scrollTo({ top: evt.detail.target.offsetTop - 100, behavior: 'smooth' });
+        function clearSearch(button) {
+            const input = button.parentElement.querySelector('input');
+            input.value = '';
+            htmx.trigger(input, 'keyup');
+            document.querySelector('select[name=province]').value = '';
+            htmx.trigger('select[name=province]', 'change');
         }
-    });
-
-    document.querySelector('select[name="province"]').addEventListener('change', function (e) {
-        if (e.target.value === '') {
-            htmx.trigger(this, 'change');
-        }
-    });
-</script>
+    </script>
 {% endblock %}

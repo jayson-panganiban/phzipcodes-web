@@ -1,41 +1,40 @@
-{% if regions%}
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3" id="regions-grid">
+{% if regions %}
+<div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3">
     {% for region in regions|sort %}
     <a href="/provinces?region={{ region|urlencode }}"
-        class="group transform hover:scale-[1.02] transition-all duration-300 ease-in-out">
-        <div class="h-full bg-white rounded-xl shadow-sm hover:shadow-xl p-3 sm:p-4 lg:p-6 border border-slate-100 
-            hover:border-purple-300 overflow-hidden hover:bg-gradient-to-r from-purple-50 to-white 
-            transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-            <div class="flex items-center justify-between mb-3">
-                <h3
-                    class="text-lg sm:text-xl lg:text-2xl font-medium text-slate-800 group-hover:text-purple-600 transition-colors">
-                    {{ region }}
-                </h3>
-                <span class="text-purple-500 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <img src="/static/icons/caret-right.svg" class="w-5 h-5 mr-1 filter-purple">
-                </span>
-            </div>
-            <div class="space-y-3">
-                <div class="flex items-center text-xs text-slate-400 group-hover:text-purple-500 transition-colors">
-                    <img src="/static/icons/map-trifold.svg" class="w-4 h-4 mr-1 filter-purple">
-                    <span>View all provinces in this region</span>
-                </div>
-            </div>
+        class="h-full rounded-xl shadow-sm p-5 sm:p-6 lg:p-7 border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-2 hover:border-sky-400">
+        <div class="flex items-center justify-between">
+            <h3
+                class="text-lg sm:text-xl lg:text-2xl text-left text-sky-700 tracking-wide">
+                {{ region }}
+            </h3>
+            <img src="/static/icons/caret-right-light.svg"
+                class="w-5 h-5 opacity-0 group-hover:opacity-100">
+        </div>
+        <div class="mt-4 flex items-center text-sm font-light tracking-wide">
+            <img src="/static/icons/map-trifold-light.svg"
+                class="w-4 h-4 mr-2 opacity-70" />
+            <span>View all provinces in this region</p>
         </div>
     </a>
     {% endfor %}
 </div>
 {% else %}
-<div class="text-center py-4">
-    <div class="bg-white rounded-xl shadow-sm p-8 max-w-2xl mx-auto border border-slate-100">
-        <img src="/static/icons/magnifying-glass.svg" class="w-12 h-12 mx-auto mb-4 filter-purple opacity-50"
+<div class="rounded-2xl shadow-lg p-12 max-w-2xl mx-auto border">
+    <div class="flex flex-col items-center">
+        <img src="/static/icons/magnifying-glass-light.svg"
+            class="w-16 h-16 relative z-10 opacity-60 mb-4"
             alt="No results">
-        <h3 class="text-xl font-medium text-slate-700 mb-2">
-            No region found
+        <h3 class="text-2xl font-light mb-4 tracking-wide">
+            No regions found
         </h3>
-        <p class="text-slate-500">
-            Try adjusting your search.
-        </p>
+        <div class="flex items-center justify-center gap-2 mt-4">
+            <img src="/static/icons/lightbulb-light.svg"
+                class="w-5 h-5 opacity-70">
+            <p class="font-light italic">Try adjusting your search using
+                different region</p>
+        </div>
     </div>
 </div>
 {% endif %}

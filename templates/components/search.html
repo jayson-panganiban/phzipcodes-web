@@ -1,25 +1,15 @@
-<div class="search-wrapper">
-    <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold text-slate-800 transition-colors hover:text-purple-600">Search zip codes</h2>
-        <button
-            class="text-sm text-purple-600 hover:text-purple-800 focus:outline-none transition-all duration-300 flex items-center hover:scale-105"
-            hx-get="/search" hx-target="#results" hx-trigger="click" hx-swap="innerHTML"
-            onclick="document.querySelector('input[name=q]').value = ''">
-            <img src="/static/icons/backspace.svg" class="w-4 h-4 mr-1 filter-purple">
-            Clear Results
-        </button>
+<!-- Search Section -->
+<div class="relative max-w-2xl mx-auto" id="search-container">
+    <div class="absolute inset-y-0 left-0 pl-4 flex items-center cursor-pointer" id=" search-icon">
+        <img src="/static/icons/magnifying-glass-light.svg" class="h-6 w-6 opacity-30" alt="Search" />
     </div>
-
-    <div class="relative group">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <img src="/static/icons/magnifying-glass.svg" class="h-5 w-5 text-purple-400 filter-purple" alt="Search" />
-        </div>
-        <input type="search" name="q" placeholder="Enter location name or zip code (e.g. 4117)..." class="w-full pl-10 pr-4 py-3 rounded-lg border border-purple-100 focus:border-purple-500 
-                      focus:ring-2 focus:ring-purple-200 focus:outline-none transition-all duration-300 
-                      shadow-sm hover:shadow-md bg-white placeholder-slate-400 hover:border-purple-300"
-            hx-get="/search" hx-trigger="keyup changed delay:300ms" hx-target="#results" hx-swap="innerHTML"
-            hx-indicator="#search-indicator" />
-    </div>
-
-    <div id="results" class="mt-4 space-y-4 transition-all duration-300"></div>
+    <input name="q" placeholder="Enter location or zipcode..."
+        class="w-full pl-12 pr-16 py-4 text-lg rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300 font-light"
+        hx-get="/search" hx-trigger="keyup changed delay:300ms" hx-target="#results" hx-swap="innerHTML"
+        hx-indicator="#search-indicator" />
+    <button class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer" onclick="clearSearch(this)">
+        <img src="/static/icons/backspace-light.svg" class="h-6 w-6 opacity-30" alt="Clear" />
+    </button>
 </div>
+
+<div id="results" class="mt-4"></div>

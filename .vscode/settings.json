@@ -1,6 +1,6 @@
 {
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "mohd-akram.vscode-html-format"
   },
   "[python]": {
     "editor.formatOnSave": true,
@@ -9,5 +9,8 @@
       "source.fixAll.ruff": "explicit",
       "source.organizeImports": "explicit"
     }
-  }
+  },
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }

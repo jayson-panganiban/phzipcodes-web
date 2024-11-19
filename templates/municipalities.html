@@ -5,86 +5,104 @@
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="municipalities-page">
     <div class="text-center mx-auto">
-        <h2
-            class="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-900 mb-4">
+        <h1
+            class="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-900 mb-4"
+            aria-level="1">
             Philippine Cities & Municipalities
-        </h2>
+        </h1>
         <p class="max-w-2xl mx-auto font-light text-gray-900 sm:text-lg mb-4">
             Discover postal codes across cities and municipalities
         </p>
     </div>
-    <div
+
+    <nav
         class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide mb-3 -mx-4 px-4"
-        id="municipalities-pills">
+        id="municipalities-pills"
+        role="navigation"
+        aria-label="Province filters">
         <div class="inline-flex space-x-2">
-            <button
-                class="px-4 py-2 rounded-full bg-gray-100 font-light whitespace-nowrap"
+            <button type="button"
+                class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-light whitespace-nowrap"
                 hx-get="/municipalities/search"
                 hx-target="#municipalities-grid"
                 hx-include="[name='q']">
                 All Provinces
             </button>
             {% for province in provinces %}
-            <button
-                class="px-4 py-2 rounded-full bg-gray-100 font-light whitespace-nowrap"
+            <button type="button"
+                class="px-4 py-2 rounded-full bg-gray-100 hover:bg-yellow-100 text-gray-700 hover:text-slate-700 font-light whitespace-nowrap"
                 hx-get="/municipalities/search"
                 hx-target="#municipalities-grid"
                 hx-include="[name='q']"
-                hx-vals='{"province": "{{ province }}"}'>
+                hx-vals='{"province": "{{ province }}"}'
+                aria-label="Filter by {{ province }}">
                 {{ province }}
             </button>
             {% endfor %}
         </div>
-    </div>
-    <div
-        class="flex flex-col sm:flex-row justify-center items-center gap-2"
+    </nav>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-2"
         id="municipalities-filter">
-        <div class="relative w-full sm:w-96 lg:w-[32rem]"
+        <div role="search" class="relative w-full sm:w-96 lg:w-[32rem]"
             id="search-container">
+            <label for="municipality-search" class="sr-only">Search
+                municipalities</label>
             <div
                 class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-                id="search-icon">
+                aria-hidden="true">
                 <img src="/static/icons/magnifying-glass-light.svg"
-                    class="h-5 w-5 opacity-70" />
+                    class="h-5 w-5 opacity-70">
             </div>
-            <input type="search" name="q"
-                placeholder="Search cities or municipalities..."
+            <input type="text"
+                name="q"
+                placeholder="Enter city or municipality..."
                 class="w-full pl-10 pr-16 py-3 font-light rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300"
                 hx-get="/municipalities/search"
                 hx-trigger="keyup changed delay:300ms"
                 hx-target="#municipalities-grid"
-                hx-include="[name='province']">
-            <button
+                hx-include="[name='municipality']"
+                aria-label="Search municipalities">
+            <button type="button"
                 class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer"
                 id="clear-search"
-                onclick="clearSearch(this)">
+                onclick="clearSearch(this)"
+                aria-label="Clear search">
                 <img src="/static/icons/backspace-light.svg"
-                    class="h-5 w-5 opacity-75" />
+                    class="h-5 w-5 opacity-70" aria-hidden="true">
             </button>
         </div>
+
         <div class="hidden sm:block relative w-full sm:w-auto"
             id="select-container">
-            <select
+            <label for="province-select" class="sr-only">Filter by
+                province</label>
+            <select id="province-select"
                 class="appearance-none px-6 py-3 font-light rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300"
-                name="province" hx-get="/municipalities/search"
-                hx-trigger="change" hx-target="#municipalities-grid"
+                name="province"
+                hx-trigger="change"
+                hx-get="/municipalities/search"
+                hx-target="#municipalities-grid"
                 hx-include="[name='q']">
                 <option value>All Provinces</option>
                 {% for province in provinces %}
-                <option value="{{ province }}" {% if
-                    province==selected_province %}selected{% endif %}>
+                <option value="{{ province }}" {% if province==selected_province
+                    %}selected{% endif %}>
                     {{ province }}
                 </option>
                 {% endfor %}
             </select>
             <div
-                class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none">
+                class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none"
+                aria-hidden="true">
                 <img src="/static/icons/caret-down-light.svg"
-                    class="h-6 w-6 opacity-70" />
+                    class="h-6 w-6 opacity-70">
             </div>
         </div>
     </div>
-    <div id="municipalities-grid" class="mt-6">
+
+    <div id="municipalities-grid" class="mt-6" role="municipalities"
+        aria-label="Municipalities list">
         {% include "partials/municipalities_grid.html" %}
     </div>
 </div>

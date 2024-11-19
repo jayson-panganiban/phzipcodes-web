@@ -1,56 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Philippine Zipcodes - Find Postal Codes">
-    <meta name="description"
-        content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
-    <meta name="keywords"
-        content="philippines postal code, zip code, philippine address, postal code finder, philippine cities">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Security-Policy"
+            content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://phzipcodes.com/">
-    <meta property="og:title" content="Philippine Zipcodes - Find Postal Codes">
-    <meta property="og:description"
-        content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
-    <meta property="og:image" content="/static/images/og-image.png">
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+        <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://phzipcodes.com/">
-    <meta property="twitter:title" content="Philippine Zipcodes - Find Postal Codes">
-    <meta property="twitter:description"
-        content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
-    <meta property="twitter:image" content="/static/images/og-image.png">
+        <link rel="canonical" href="https://phzipcodes.com{{ request.path }}">
 
-    <title>{% block title %}Philippine Zipcodes{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+        <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="manifest" href="/static/manifest.json">
 
-    <!-- Scripts and Styles -->
-    <script src="/static/js/htmx.min.js" defer></script>
-    <link href="/static/css/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/fonts.css">
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Philippine Zipcodes - Find Postal Codes">
+        <meta name="description"
+            content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
+        <meta name="keywords"
+            content="philippines postal code, zip code, philippine address, postal code finder, philippine cities">
 
-    {% block head %}{% endblock %}
-</head>
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://phzipcodes.com/">
+        <meta property="og:title"
+            content="Philippine Zipcodes - Find Postal Codes">
+        <meta property="og:description"
+            content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
+        <meta property="og:image" content="/static/images/og-image.png">
 
-<body class="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-slate-50/80">
-    {% include 'components/header.html' %}
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://phzipcodes.com/">
+        <meta property="twitter:title"
+            content="Philippine Zipcodes - Find Postal Codes">
+        <meta property="twitter:description"
+            content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
+        <meta property="twitter:image" content="/static/images/og-image.png">
 
-    <!-- <main class="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8"> -->
-    <main class="container mx-auto px-4 py-6 lg:py-8 flex-grow">
-        {% block content %}{% endblock %}
-    </main>
+        <title>{% block title %}Philippine Zipcodes{% endblock %}</title>
 
-    {% include 'components/footer.html' %}
-    {% include 'components/back_to_top.html' %}
-</body>
+        <!-- Preload Critical Assets -->
+        <link rel="preload" href="/static/css/tailwind.min.css" as="style">
+        <link rel="preload" href="/static/js/htmx.min.js" as="script">
 
+        <!-- Scripts and Styles -->
+        <script src="/static/js/htmx.min.js" defer></script>
+        <link href="/static/css/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/css/fonts.css">
+
+        {% block head %}{% endblock %}
+    </head>
+
+    <body
+        class="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <noscript>
+            <div
+                class="alert alert-warning text-center p-4 bg-yellow-100 text-yellow-800">
+                This website works best with JavaScript enabled.
+            </div>
+        </noscript>
+
+        {% include 'components/header.html' %}
+
+        <main role="main" class="container mx-auto px-4 py-6 lg:py-8 flex-grow">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include 'components/footer.html' %}
+
+        {% include 'components/back_to_top.html' %}
+    </body>
 
 </html>

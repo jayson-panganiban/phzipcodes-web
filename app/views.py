@@ -38,7 +38,7 @@ async def search_zipcodes(request: Request, q: str = "") -> HTMLResponse:
             results = list(phzipcodes.search(q))
 
     return templates.TemplateResponse(
-        "components/results.html",
+        "partials/results.html",
         {"request": request, "results": results},
     )
 

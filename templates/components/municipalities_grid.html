@@ -1,46 +1,55 @@
 {% if municipalities %}
 <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3"
-    id="municipalities">
-    {% for municipality in municipalities%}
+    id="municipalities"
+    role="list">
+    {% for municipality in municipalities %}
     <div
-        class="h-full rounded-xl shadow-sm p-5 sm:p-6 lg:p-7 border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-2 hover:border-sky-400">
+        class="h-full rounded-xl shadow-sm p-5 sm:p-6 lg:p-7 border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl"
+        role="listitem">
         <div class="flex items-center justify-between">
-            <h3
-                class="text-lg sm:text-xl lg:text-2xl text-left text-slate-700 tracking-wide">{{
-                municipality.name }}
-            </h3>
+            <h2
+                class="sm:text-lg text-left tracking-wide text-gray-900">
+                {{ municipality.name }}
+            </h2>
         </div>
-        <div class="flex flex-wrap justify-between gap-2 mt-auto pt-4">
+        <div class="flex items-center justify-between pt-4"
+            id="municipality-details">
             <div
-                class="mt-4 flex items-center text-sm font-light tracking-wide">
-                <img src="/static/icons/map-trifold.svg"
-                    class="w-4 h-4 mr-2 opacity-70" />
-                {{ municipality.province }}
+                class="flex items-center text-sm font-light tracking-wide text-gray-900">
+                <img src="/static/icons/map-trifold-light.svg"
+                    class="w-4 h-4 mr-2 opacity-70"
+                    aria-hidden="true">
+                <span>{{ municipality.province }}</span>
             </div>
-            <div
-                class="text-slate-800 px-3 py-1 flex items-center">
+            <div class="flex items-center text-gray-900" aria-label="Zip code">
                 <img src="/static/icons/map-pin.svg"
-                    class="w-4 h-4 mr-2 opacity-70">
-                {{ municipality.zipcode }}
+                    class="w-4 h-4 mr-2 opacity-70"
+                    aria-hidden="true">
+                <span>{{ municipality.zipcode }}</span>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+
 {% else %}
-<div class="text-center py-4">
-    <div
-        class="bg-white rounded-xl shadow-sm p-8 max-w-2xl mx-auto border border-slate-100">
-        <img src="/static/icons/magnifying-glass.svg"
-            class="w-12 h-12 mx-auto mb-4 filter-purple opacity-50"
-            alt="No results">
-        <h3 class="text-xl font-medium text-slate-700 mb-2">
+
+<div class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border" role="alert">
+    <div class="flex flex-col items-center">
+        <img src="/static/icons/magnifying-glass-light.svg"
+            class="w-16 h-16 relative z-10 opacity-60 mb-4"
+            aria-hidden="true">
+        <h2 class="text-2xl font-light mb-4 tracking-wide">
             No city or municipality found
-        </h3>
-        <p class="text-slate-500">
-            Try adjusting your search or select a different province.
-        </p>
+        </h2>
+        <div class="flex items-center justify-center gap-2 mt-4">
+            <img src="/static/icons/lightbulb-light.svg"
+                class="w-5 h-5 opacity-70"
+                aria-hidden="true">
+            <p class="font-light italic">Try adjusting your search using
+                different keyword</p>
+        </div>
     </div>
 </div>
 {% endif %}

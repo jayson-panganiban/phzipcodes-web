@@ -3,27 +3,32 @@
 {% block title %}Cities & Municipalities - Philippine Zipcodes{% endblock %}
 
 {% block content %}
-<div class="text-center max-w-6xl mx-auto" id="municipalities-page">
-    <h2
-        class="text-xl sm:text-2xl lg:text-3xl font-medium mb-4">
-        Philippine Cities & Municipalities
-    </h2>
-    <p class="max-w-2xl mx-auto font-light text-lg mb-4">
-        Discover postal codes across cities and municipalities
-    </p>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="municipalities-page">
+    <div class="text-center mx-auto">
+        <h2
+            class="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-900 mb-4">
+            Philippine Cities & Municipalities
+        </h2>
+        <p class="max-w-2xl mx-auto font-light text-gray-900 sm:text-lg mb-4">
+            Discover postal codes across cities and municipalities
+        </p>
+    </div>
     <div
-        class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide mb-3 -mx-4 px-4">
+        class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide mb-3 -mx-4 px-4"
+        id="municipalities-pills">
         <div class="inline-flex space-x-2">
             <button
                 class="px-4 py-2 rounded-full bg-gray-100 font-light whitespace-nowrap"
-                hx-get="/municipalities/search" hx-target="#municipalities-grid"
+                hx-get="/municipalities/search"
+                hx-target="#municipalities-grid"
                 hx-include="[name='q']">
                 All Provinces
             </button>
             {% for province in provinces %}
             <button
                 class="px-4 py-2 rounded-full bg-gray-100 font-light whitespace-nowrap"
-                hx-get="/municipalities/search" hx-target="#municipalities-grid"
+                hx-get="/municipalities/search"
+                hx-target="#municipalities-grid"
                 hx-include="[name='q']"
                 hx-vals='{"province": "{{ province }}"}'>
                 {{ province }}
@@ -32,14 +37,17 @@
         </div>
     </div>
     <div
-        class="flex flex-col sm:flex-row justify-center items-center gap-2">
-        <div class="relative w-full sm:w-96 lg:w-[32rem]" id="search-container">
+        class="flex flex-col sm:flex-row justify-center items-center gap-2"
+        id="municipalities-filter">
+        <div class="relative w-full sm:w-96 lg:w-[32rem]"
+            id="search-container">
             <div
-                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                id="search-icon">
                 <img src="/static/icons/magnifying-glass-light.svg"
-                    class="h-5 w-5" alt="Search" />
+                    class="h-5 w-5 opacity-70" />
             </div>
-            <input type="text" name="q"
+            <input type="search" name="q"
                 placeholder="Search cities or municipalities..."
                 class="w-full pl-10 pr-16 py-3 font-light rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300"
                 hx-get="/municipalities/search"
@@ -51,7 +59,7 @@
                 id="clear-search"
                 onclick="clearSearch(this)">
                 <img src="/static/icons/backspace-light.svg"
-                    class="h-5 w-5 opacity-75" alt="Clear" />
+                    class="h-5 w-5 opacity-75" />
             </button>
         </div>
         <div class="hidden sm:block relative w-full sm:w-auto"
@@ -72,22 +80,45 @@
             <div
                 class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none">
                 <img src="/static/icons/caret-down-light.svg"
-                    class="h-6 w-6 opacity-70" alt="Select" />
+                    class="h-6 w-6 opacity-70" />
             </div>
         </div>
-
     </div>
-    <div id="municipalities-grid" class="mt-4">
+    <div id="municipalities-grid" class="mt-6">
         {% include "components/municipalities_grid.html" %}
     </div>
 </div>
+
 <script>
-        function clearSearch(button) {
-            const input = button.parentElement.querySelector('input');
-            input.value = '';
-            htmx.trigger(input, 'keyup');
-            document.querySelector('select[name=province]').value = '';
-            htmx.trigger('select[name=province]', 'change');
+    function clearSearch(button) {
+        const input = button.parentElement.querySelector('input');
+        input.value = '';
+        htmx.trigger(input, 'keyup');
+        document.querySelector('select[name=province]').value = '';
+        htmx.trigger('select[name=province]', 'change');
+    }
+
+    window.onload = function () {
+        // Clear search input
+        const searchInput = document.querySelector('input[name="q"]');
+        if (searchInput) {
+            searchInput.value = '';
         }
-    </script>
+        
+        // Clear province select
+        const provinceSelect = document.querySelector('select[name="province"]');
+        if (provinceSelect) {
+            provinceSelect.value = '';
+        }
+        
+        // Check URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const province = urlParams.get('province');
+        if (province) {
+            provinceSelect.value = decodeURIComponent(province);
+            htmx.trigger(provinceSelect, 'change');
+        }
+    }
+</script>
+
 {% endblock %}

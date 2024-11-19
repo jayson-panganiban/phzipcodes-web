@@ -1,37 +1,41 @@
 {% if regions %}
 <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3">
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3"
+    role="list">
     {% for region in regions|sort %}
     <a href="/provinces?region={{ region|urlencode }}"
-        class="h-full rounded-xl shadow-sm p-5 sm:p-6 lg:p-7 border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-2 hover:border-sky-400">
+        class="h-full rounded-xl shadow-sm p-5 sm:p-6 lg:p-7 border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-2 hover:border-sky-400"
+        role="listitem"
+        aria-label="View provinces in {{ region }}">
         <div class="flex items-center justify-between">
-            <h3
-                class="text-lg sm:text-xl lg:text-2xl text-left text-sky-700 tracking-wide">
-                {{ region }}
-            </h3>
+            <h2 class="sm:text-lg text-left tracking-wide text-gray-900">{{
+                region }}</h2>
             <img src="/static/icons/caret-right-light.svg"
-                class="w-5 h-5 opacity-0 group-hover:opacity-100">
+                class="w-5 h-5 opacity-0 group-hover:opacity-100"
+                aria-hidden="true">
         </div>
-        <div class="mt-4 flex items-center text-sm font-light tracking-wide">
+        <div
+            class="mt-4 flex items-center text-sm font-light tracking-wide text-gray-900">
             <img src="/static/icons/map-trifold-light.svg"
-                class="w-4 h-4 mr-2 opacity-70" />
-            <span>View all provinces in this region</p>
+                class="w-4 h-4 mr-2 opacity-70" aria-hidden="true">
+            <span>View all provinces in this region</span>
         </div>
     </a>
     {% endfor %}
 </div>
+
 {% else %}
-<div class="rounded-2xl shadow-lg p-12 max-w-2xl mx-auto border">
+
+<div class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border" role="alert">
     <div class="flex flex-col items-center">
         <img src="/static/icons/magnifying-glass-light.svg"
-            class="w-16 h-16 relative z-10 opacity-60 mb-4"
-            alt="No results">
-        <h3 class="text-2xl font-light mb-4 tracking-wide">
+            class="w-16 h-16 relative z-10 opacity-60 mb-4 aria-hidden="true">
+        <h2 class="text-2xl font-light mb-4 tracking-wide">
             No regions found
-        </h3>
-        <div class="flex items-center justify-center gap-2 mt-4">
+        </h2>
+        <div class="flex items-center justify-center gap-5 mt-4">
             <img src="/static/icons/lightbulb-light.svg"
-                class="w-5 h-5 opacity-70">
+                class="w-5 h-5 opacity-70" aria-hidden="true">
             <p class="font-light italic">Try adjusting your search using
                 different region</p>
         </div>

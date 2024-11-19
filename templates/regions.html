@@ -5,37 +5,43 @@
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="regions-page">
     <div class="text-center mx-auto">
-        <h2
-            class="text-xl sm:text-2xl lg:text-3xl font-medium mb-4">
+        <h1
+            class="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-900 mb-4"
+            aria-level="1">
             Philippine Regions
-        </h2>
-        <p class="max-w-2xl mx-auto font-light text-lg mb-4">
+        </h1>
+        <p class="max-w-2xl mx-auto font-light text-gray-900 sm:text-lg mb-4">
             Explore the diverse regions of the Philippines, from Luzon to
             Mindanao
         </p>
     </div>
-    <div class="relative max-w-xl mx-auto" id="search-container">
+    <div role="search" class="relative max-w-xl mx-auto" id="search-container">
+        <label for="region-search" class="sr-only">Search regions</label>
         <div
             class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-            id="search-icon">
+            aria-hidden="true">
             <img src="/static/icons/magnifying-glass-light.svg"
-                class="h-5 w-5 opacity-50" alt="Search" />
+                class="h-5 w-5 opacity-70">
         </div>
-        <input name="q" placeholder="Enter region name..."
-            class="w-full pl-10 pr-16 py-3 text-lg rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300"
+        <input type="text"
+            id="region-search"
+            name="q"
+            placeholder="Enter region name..."
+            class="w-full pl-10 pr-16 py-3 rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-300"
             hx-get="/regions/search"
             hx-trigger="keyup changed delay:300ms"
             hx-target="#regions-grid"
-            hx-include="[name='region']">
-        <button
+            hx-include="[name='region']"
+            aria-label="Search regions">
+        <button type="button"
             class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer"
-            onclick="clearSearch(this)">
+            onclick="clearSearch(this)"
+            aria-label="Clear region search">
             <img src="/static/icons/backspace-light.svg"
-                class="h-5 w-5 opacity-50" alt="Clear" />
+                class="h-5 w-5 opacity-70" aria-hidden="true">
         </button>
     </div>
-    <!-- Regions Grid -->
-    <div id="regions-grid" class="mt-4">
+    <div id="regions-grid" class="mt-6" role="region" aria-label="Regions list">
         {% include "components/regions_grid.html" %}
     </div>
 </div>
@@ -46,5 +52,15 @@
         input.value = '';
         htmx.trigger(input, 'keyup');
     }
+
+    window.onload = function () {
+        // Clear search input
+        const searchInput = document.querySelector('input[name="q"]');
+        if (searchInput) {
+            searchInput.value = '';
+            htmx.trigger(searchInput, 'keyup');
+        }
+    }
 </script>
+
 {% endblock %}

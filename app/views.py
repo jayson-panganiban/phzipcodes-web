@@ -63,7 +63,7 @@ async def search_regions(request: Request, q: str = "") -> HTMLResponse:
     if q:
         regions = [r for r in regions if q.lower() in r.lower()]
     return templates.TemplateResponse(
-        "components/regions_grid.html", {"request": request, "regions": regions}
+        "partials/regions_grid.html", {"request": request, "regions": regions}
     )
 
 
@@ -106,7 +106,7 @@ async def search_provinces(
         provinces = [p for p in provinces if q.lower() in p.lower()]
 
     return templates.TemplateResponse(
-        "components/provinces_grid.html",
+        "partials/provinces_grid.html",
         {"request": request, "provinces": set(provinces)},
     )
 
@@ -170,7 +170,7 @@ async def search_municipalities(
     municipalities.sort(key=lambda x: x["name"])
 
     return templates.TemplateResponse(
-        "components/municipalities_grid.html",
+        "partials/municipalities_grid.html",
         {"request": request, "municipalities": municipalities},
     )
 

@@ -1,58 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Content-Security-Policy"
             content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
 
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-        <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
-
         <link rel="canonical" href="https://phzipcodes.com{{ request.path }}">
 
-        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-        <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
-        <meta name="theme-color" content="#ffffff">
-        <link rel="manifest" href="/static/manifest.json">
-
         <!-- Primary Meta Tags -->
-        <meta name="title" content="Philippine Zipcodes - Find Postal Codes">
+        <meta name="title"
+            content="{% block meta_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
         <meta name="description"
-            content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
+            content="{% block meta_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
         <meta name="keywords"
             content="philippines postal code, zip code, philippine address, postal code finder, philippine cities">
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://phzipcodes.com/">
+        <meta property="og:url"
+            content="https://phzipcodes.com{{ request.path }}">
         <meta property="og:title"
-            content="Philippine Zipcodes - Find Postal Codes">
+            content="{% block og_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
         <meta property="og:description"
-            content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
+            content="{% block og_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
         <meta property="og:image" content="/static/images/og-image.png">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://phzipcodes.com/">
+        <meta property="twitter:url"
+            content="https://phzipcodes.com{{ request.path }}">
         <meta property="twitter:title"
-            content="Philippine Zipcodes - Find Postal Codes">
+            content="{% block twitter_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
         <meta property="twitter:description"
-            content="Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.">
+            content="{% block twitter_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
         <meta property="twitter:image" content="/static/images/og-image.png">
 
         <title>{% block title %}Philippine Zipcodes{% endblock %}</title>
 
-        <!-- Preload Critical Assets -->
-        <link rel="preload" href="/static/css/tailwind.min.css" as="style">
-        <link rel="preload" href="/static/js/htmx.min.js" as="script">
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Philippine Zipcodes",
+            "description": "Find postal codes for any location in the Philippines",
+            "url": "https://phzipcodes.com",
+            "applicationCategory": "Utility",
+            "operatingSystem": "All"
+        }
+        </script>
 
         <!-- Scripts and Styles -->
         <script src="/static/js/htmx.min.js" defer></script>
+        <link rel="preload" href="/static/js/htmx.min.js" as="script"
+            fetchpriority="high">
+        <link rel="preload" href="/static/icons/magnifying-glass-light.svg"
+            as="image" type="image/svg+xml">
+        <link rel="preload" href="/static/icons/backspace-light.svg" as="image"
+            type="image/svg+xml">
+        <link rel="preload" href="/static/icons/map-pin.svg" as="image"
+            type="image/svg+xml">
+
         <link href="/static/css/tailwind.min.css" rel="stylesheet">
+        <link href="/static/css/styles.css" rel="stylesheet">
         <link rel="stylesheet" href="/static/css/fonts.css">
 
         {% block head %}{% endblock %}
@@ -68,14 +81,13 @@
         </noscript>
 
         {% include 'components/header.html' %}
+        {% include 'components/breadcrumbs.html' %}
 
         <main role="main" class="container mx-auto px-4 py-6 lg:py-8 flex-grow">
             {% block content %}{% endblock %}
         </main>
 
         {% include 'components/footer.html' %}
-
         {% include 'components/back_to_top.html' %}
     </body>
-
 </html>

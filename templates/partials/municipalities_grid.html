@@ -1,30 +1,30 @@
 {% if municipalities %}
 <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3"
-    id="municipalities"
-    role="list">
+    id="municipalities-grid" role="list">
     {% for municipality in municipalities %}
     <div
-        class="h-full rounded-xl shadow-sm p-5 sm:p-6 lg:p-7 border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl"
+        class="p-5 sm:p-6 lg:p-7 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-yellow-500"
         role="listitem">
         <div class="flex items-center justify-between">
-            <h2
-                class="sm:text-lg text-left tracking-wide text-gray-900">
+            <h2 class="sm:text-lg text-left tracking-wide text-slate-900">
                 {{ municipality.name }}
             </h2>
         </div>
         <div class="flex items-center justify-between pt-4"
             id="municipality-details">
             <div
-                class="flex items-center text-sm font-light tracking-wide text-gray-900">
+                class="flex items-center text-sm font-light tracking-wide text-slate-900">
                 <img src="/static/icons/map-trifold-light.svg"
                     class="w-4 h-4 mr-2 opacity-70"
+                    loading="lazy"
                     aria-hidden="true">
                 <span>{{ municipality.province }}</span>
             </div>
-            <div class="flex items-center text-gray-900" aria-label="Zip code">
+            <div class="flex items-center text-slate-900" aria-label="Zip code">
                 <img src="/static/icons/map-pin.svg"
                     class="w-4 h-4 mr-2 opacity-70"
+                    loading="lazy"
                     aria-hidden="true">
                 <span>{{ municipality.zipcode }}</span>
             </div>
@@ -34,11 +34,11 @@
 </div>
 
 {% else %}
-
 <div class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border" role="alert">
     <div class="flex flex-col items-center">
         <img src="/static/icons/magnifying-glass-light.svg"
             class="w-16 h-16 relative z-10 opacity-60 mb-4"
+            loading="lazy"
             aria-hidden="true">
         <h2 class="text-2xl font-light mb-4 tracking-wide">
             No city or municipality found
@@ -46,6 +46,7 @@
         <div class="flex items-center justify-center gap-2 mt-4">
             <img src="/static/icons/lightbulb-light.svg"
                 class="w-5 h-5 opacity-70"
+                loading="lazy"
                 aria-hidden="true">
             <p class="font-light italic">Try adjusting your search using
                 different keyword</p>

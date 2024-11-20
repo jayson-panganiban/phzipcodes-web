@@ -1,23 +1,26 @@
 {% if regions %}
 <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3"
-    role="list">
+    id="regions-grid" role="list">
     {% for region in regions|sort %}
     <a href="/provinces?region={{ region|urlencode }}"
-        class="h-full rounded-xl shadow-sm p-5 sm:p-6 lg:p-7 border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-2 hover:border-sky-400"
+        class="p-5 sm:p-6 lg:p-7 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-yellow-500"
         role="listitem"
         aria-label="View provinces in {{ region }}">
         <div class="flex items-center justify-between">
-            <h2 class="sm:text-lg text-left tracking-wide text-gray-900">{{
+            <h2 class="sm:text-lg text-left tracking-wide text-slate-900">{{
                 region }}</h2>
             <img src="/static/icons/caret-right-light.svg"
-                class="w-5 h-5 opacity-0 group-hover:opacity-100"
+                class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
                 aria-hidden="true">
         </div>
         <div
-            class="mt-4 flex items-center text-sm font-light tracking-wide text-gray-900">
+            class="mt-4 flex items-center text-sm font-light tracking-wide text-slate-900">
             <img src="/static/icons/map-trifold-light.svg"
-                class="w-4 h-4 mr-2 opacity-70" aria-hidden="true">
+                class="w-4 h-4 mr-2 opacity-70"
+                loading="lazy"
+                aria-hidden="true">
             <span>View all provinces in this region</span>
         </div>
     </a>
@@ -25,17 +28,18 @@
 </div>
 
 {% else %}
-
 <div class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border" role="alert">
     <div class="flex flex-col items-center">
         <img src="/static/icons/magnifying-glass-light.svg"
-            class="w-16 h-16 relative z-10 opacity-60 mb-4 aria-hidden="true">
-        <h2 class="text-2xl font-light mb-4 tracking-wide">
-            No regions found
-        </h2>
+            class="w-16 h-16 relative z-10 opacity-60 mb-4"
+            loading="lazy"
+            aria-hidden="true">
+        <h2 class="text-2xl font-light mb-4 tracking-wide">No regions found</h2>
         <div class="flex items-center justify-center gap-5 mt-4">
             <img src="/static/icons/lightbulb-light.svg"
-                class="w-5 h-5 opacity-70" aria-hidden="true">
+                class="w-5 h-5 opacity-70"
+                loading="lazy"
+                aria-hidden="true">
             <p class="font-light italic">Try adjusting your search using
                 different region</p>
         </div>

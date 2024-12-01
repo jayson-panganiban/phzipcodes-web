@@ -24,7 +24,7 @@ Mindanao. Find postal codes by region.{% endblock %}
             class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
             aria-hidden="true">
             <img src="/static/icons/magnifying-glass-light.svg"
-                class="h-5 w-5 opacity-50"
+                class="h-5 w-5 opacity-80"
                 loading="eager"
                 fetchpriority="high">
         </div>
@@ -32,11 +32,10 @@ Mindanao. Find postal codes by region.{% endblock %}
             id="region-search"
             name="q"
             placeholder="Enter region name..."
-            class="w-full pl-10 pr-16 py-3 rounded-xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-400"
+            class="w-full pl-10 pr-16 py-3 rounded-xl border shadow-md focus:outline-none focus:ring-2 ring-yellow-800"
             hx-get="/regions/search"
             hx-trigger="keyup changed delay:300ms"
             hx-target="#regions-grid"
-            hx-include="[name='region']"
             hx-boost="true"
             aria-label="Search regions">
         <button type="button"
@@ -44,7 +43,7 @@ Mindanao. Find postal codes by region.{% endblock %}
             onclick="clearSearch(this)"
             aria-label="Clear region search">
             <img src="/static/icons/backspace-light.svg"
-                class="h-5 w-5 opacity-50"
+                class="h-5 w-5 opacity-80"
                 alt="Clear search"
                 loading="eager">
         </button>

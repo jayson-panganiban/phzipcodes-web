@@ -4,7 +4,7 @@
     id="municipalities-grid" role="list">
     {% for municipality in municipalities %}
     <div
-        class="p-5 sm:p-6 lg:p-7 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm border group transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl hover:border-yellow-500"
+        class="p-5 sm:p-6 lg:p-7 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm border group transform transition-all duration-300 hover:border-yellow-800"
         role="listitem">
         <div class="flex items-center justify-between">
             <h2 class="sm:text-lg text-left tracking-wide text-slate-900">
@@ -17,6 +17,7 @@
                 class="flex items-center text-sm font-light tracking-wide text-slate-900">
                 <img src="/static/icons/map-trifold-light.svg"
                     class="w-4 h-4 mr-2 opacity-70"
+                    style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
                     loading="lazy"
                     aria-hidden="true">
                 <span>{{ municipality.province }}</span>
@@ -24,6 +25,7 @@
             <div class="flex items-center text-slate-900" aria-label="Zip code">
                 <img src="/static/icons/map-pin.svg"
                     class="w-4 h-4 mr-2 opacity-70"
+                    style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"                    
                     loading="lazy"
                     aria-hidden="true">
                 <span>{{ municipality.zipcode }}</span>

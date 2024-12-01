@@ -54,7 +54,7 @@ across the Philippines. Search by name or browse by province.{% endblock %}
                 class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
                 aria-hidden="true">
                 <img src="/static/icons/magnifying-glass-light.svg"
-                    class="h-5 w-5 opacity-70"
+                    class="h-5 w-5 opacity-80"
                     loading="eager"
                     fetchpriority="high">
             </div>
@@ -62,7 +62,7 @@ across the Philippines. Search by name or browse by province.{% endblock %}
                 id="municipality-search"
                 name="q"
                 placeholder="Enter city or municipality..."
-                class="w-full pl-10 pr-16 py-3 rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-400"
+                class="w-full pl-10 pr-16 py-3 rounded-2xl border shadow-md focus:outline-none focus:ring-2 ring-yellow-800"
                 hx-get="/municipalities/search"
                 hx-trigger="keyup changed delay:300ms"
                 hx-target="#municipalities-grid"
@@ -75,7 +75,7 @@ across the Philippines. Search by name or browse by province.{% endblock %}
                 onclick="clearSearch(this)"
                 aria-label="Clear search">
                 <img src="/static/icons/backspace-light.svg"
-                    class="h-5 w-5 opacity-70"
+                    class="h-5 w-5 opacity-80"
                     loading="eager">
             </button>
         </div>
@@ -85,7 +85,7 @@ across the Philippines. Search by name or browse by province.{% endblock %}
             <label for="province-select" class="sr-only">Filter by
                 province</label>
             <select id="province-select"
-                class="appearance-none px-6 py-3 rounded-2xl border shadow-lg focus:outline-none focus:ring-4 ring-gray-400"
+                class="appearance-none px-6 py-3 rounded-2xl border shadow-md focus:outline-none focus:ring-2 ring-yellow-800"
                 name="province"
                 hx-trigger="change"
                 hx-get="/municipalities/search"
@@ -104,7 +104,7 @@ across the Philippines. Search by name or browse by province.{% endblock %}
                 class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none"
                 aria-hidden="true">
                 <img src="/static/icons/caret-down-light.svg"
-                    class="h-6 w-6 opacity-70"
+                    class="h-6 w-6 opacity-80"
                     loading="eager">
             </div>
         </div>

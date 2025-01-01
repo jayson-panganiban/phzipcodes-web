@@ -1,5 +1,6 @@
-phzipcodes==0.1.5
-fastapi==0.115.4
-jinja2==3.1.4
-uvicorn==0.32.0
-pytest==8.3.3
+phzipcodes>=0.1.7
+fastapi>=0.115.6
+jinja2>=3.1.5
+uvicorn>=0.34.0
+ruff>=0.8.4
+pytest>=8.3.4

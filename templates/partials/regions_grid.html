@@ -4,14 +4,14 @@
     id="regions-grid" role="list">
     {% for region in regions|sort %}
     <a href="/provinces?region={{ region|urlencode }}"
-        class="p-5 sm:p-6 lg:p-7 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm border group transform transition-all duration-300 hover:border-yellow-800"
+        class="p-5 sm:p-6 lg:p-7 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm border group transform transition-all duration-300"
         role="listitem"
         aria-label="View provinces in {{ region }}">
         <div class="flex items-center justify-between">
             <h2 class="sm:text-lg text-left tracking-wide text-slate-900">{{
                 region }}</h2>
             <img src="/static/icons/caret-right-light.svg"
-                class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                class="w-5 h-5 opacity-0 transition-opacity duration-300"
                 loading="lazy"
                 aria-hidden="true">
         </div>

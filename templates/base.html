@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta http-equiv="Content-Security-Policy"
-            content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
 
-        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-        <link rel="canonical" href="https://phzipcodes.com{{ request.path }}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
 
-        <!-- Primary Meta Tags -->
-        <meta name="title"
-            content="{% block meta_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
-        <meta name="description"
-            content="{% block meta_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
-        <meta name="keywords"
-            content="philippines postal code, zip code, philippine address, postal code finder, philippine cities">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="canonical" href="https://phzipcodes.com{{ request.path }}">
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website">
-        <meta property="og:url"
-            content="https://phzipcodes.com{{ request.path }}">
-        <meta property="og:title"
-            content="{% block og_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
-        <meta property="og:description"
-            content="{% block og_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
-        <meta property="og:image" content="/static/images/og-image.png">
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="{% block meta_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
+    <meta name="description"
+        content="{% block meta_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
+    <meta name="keywords"
+        content="philippines postal code, zip code, philippine address, postal code finder, philippine cities">
 
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url"
-            content="https://phzipcodes.com{{ request.path }}">
-        <meta property="twitter:title"
-            content="{% block twitter_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
-        <meta property="twitter:description"
-            content="{% block twitter_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
-        <meta property="twitter:image" content="/static/images/og-image.png">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://phzipcodes.com{{ request.path }}">
+    <meta property="og:title" content="{% block og_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
+    <meta property="og:image" content="/static/images/og-image.png">
 
-        <title>{% block title %}Philippine Zipcodes{% endblock %}</title>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://phzipcodes.com{{ request.path }}">
+    <meta property="twitter:title"
+        content="{% block twitter_title %}Philippine Zipcodes - Find Postal Codes{% endblock %}">
+    <meta property="twitter:description"
+        content="{% block twitter_description %}Find postal codes for any location in the Philippines. Search by city, municipality, province, or region.{% endblock %}">
+    <meta property="twitter:image" content="/static/images/og-image.png">
 
-        <!-- Structured Data -->
-        <script type="application/ld+json">
+    <title>{% block title %}Philippine Zipcodes{% endblock %}</title>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebApplication",
@@ -53,41 +50,31 @@
         }
         </script>
 
-        <!-- Scripts and Styles -->
-        <script src="/static/js/htmx.min.js" defer></script>
-        <link rel="preload" href="/static/js/htmx.min.js" as="script"
-            fetchpriority="high">
-        <link rel="preload" href="/static/icons/magnifying-glass-light.svg"
-            as="image" type="image/svg+xml">
-        <link rel="preload" href="/static/icons/backspace-light.svg" as="image"
-            type="image/svg+xml">
-        <link rel="preload" href="/static/icons/map-pin.svg" as="image"
-            type="image/svg+xml">
+    <!-- Scripts and Styles -->
+    <script src="/static/js/htmx.min.js" defer></script>
+    <link rel="preload" href="/static/js/htmx.min.js" as="script" fetchpriority="high">
+    <link rel="preload" href="/static/icons/magnifying-glass-light.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="/static/icons/backspace-light.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="/static/icons/map-pin.svg" as="image" type="image/svg+xml">
 
-        <link href="/static/css/tailwind.min.css" rel="stylesheet">
-        <link href="/static/css/styles.css" rel="stylesheet">
-        <link rel="stylesheet" href="/static/css/fonts.css">
+    <link href="/static/css/tailwind.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/fonts.css">
 
-        {% block head %}{% endblock %}
-    </head>
+    {% block head %}{% endblock %}
+</head>
 
-    <body
-        class="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-        <noscript>
-            <div
-                class="alert alert-warning text-center p-4 bg-yellow-100 text-yellow-800">
-                This website works best with JavaScript enabled.
-            </div>
-        </noscript>
+<body
+    class="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
 
-        {% include 'components/header.html' %}
-        {% include 'components/breadcrumbs.html' %}
+    {% include 'components/header.html' %}
 
-        <main role="main" class="container mx-auto px-4 py-6 lg:py-8 flex-grow">
-            {% block content %}{% endblock %}
-        </main>
+    <main role="main" class="container mx-auto px-4 py-6 lg:py-8 flex-grow">
+        {% block content %}{% endblock %}
+    </main>
 
-        {% include 'components/footer.html' %}
-        {% include 'components/back_to_top.html' %}
-    </body>
+    {% include 'components/footer.html' %}
+    {% include 'components/back_to_top.html' %}
+</body>
+
 </html>

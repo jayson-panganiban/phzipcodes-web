@@ -8,10 +8,19 @@ class Settings(BaseModel):
     # App settings
     APP_NAME: Final[str] = "Philippine Zipcodes"
     VERSION: Final[str] = "1.0.0"
-    DEBUG: bool = True
 
     # Security settings
     ALLOWED_HOSTS: list[str] = ["*"]
+    CORS_ORIGINS: list[str] = ["*"]
+    SECURITY_HEADERS: dict[str, str] = {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-XSS-Protection": "1; mode=block",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "interest-cohort=()",
+        "Content-Security-Policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'",
+    }
 
     # Path settings
     BASE_DIR: Path = Path(__file__).resolve().parent.parent
@@ -23,9 +32,7 @@ class Settings(BaseModel):
     CACHE_TTL: Final[int] = 3600
     CACHE_ENABLED: bool = True
 
-    # Logging settings
-    LOG_LEVEL: str = "INFO"
-    LOG_FORMAT: str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    model_config = {"arbitrary_types_allowed": True, "frozen": True}
 
 
 settings = Settings()

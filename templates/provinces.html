@@ -1,38 +1,78 @@
 {% extends "base.html" %}
 
-{% block title %}Provinces - Philippine Zipcodes{% endblock %}
-{% block meta_description %}Discover postal codes across Philippine provinces.
-Easy search and navigation by province.{% endblock %}
+{% block title %}Philippine Provinces - Browse Postal Codes by Province{%
+endblock %}
+{% block description %}Find zip codes across Philippine provinces. Easy
+navigation through complete postal code listings by province. Official PHLPost
+data.{% endblock %}
+{% block keywords %}philippine province postal codes, provincial zip codes,
+PHLPost province directory, local postal codes{% endblock %}
+
+{% block head %}
+<link rel="preload" href="/static/icons/magnifying-glass-light.svg" as="image"
+    fetchpriority="high">
+<link rel="preload" href="/static/icons/backspace-light.svg" as="image"
+    fetchpriority="high">
+<link rel="preload" href="/static/icons/caret-down-light.svg" as="image"
+    fetchpriority="high">
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Philippine Provinces Directory",
+    "description": "Browse postal codes by province",
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Provinces",
+            "item": "https://phzipcodes.com/provinces"
+        }]
+    },
+    "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Browse by Province",
+                "description": "Find postal codes for any Philippine province"
+            }
+        ]
+    }
+}
+</script>
+{% endblock %}
+
+[Rest of the existing provinces.html content remains the same...]
 
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="provinces-page">
-    <div class="text-center mx-auto">
+    <header class="text-center mx-auto mb-2">
         <h1
-            class="text-2xl sm:text-3xl lg:text-4xl font-medium mb-4"
-            aria-level="1">
-            Philippine Provinces
+            class="text-3xl sm:text-5xl lg:text-6xl font-light mb-6 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text ">
+            Explore Philippine Provinces
         </h1>
-        <p class="max-w-2xl mx-auto font-light text-slate-900 sm:text-lg mb-4">
-            Discover all provinces across the Philippine archipelago
-        </p>
-    </div>
-
+    </header>
     <nav
-        class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide mb-3 -mx-4 px-4"
+        class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide mb-2 -mx-4 px-4"
         id="provinces-pills"
         role="navigation"
         aria-label="Region filters">
         <div class="inline-flex space-x-2">
             <button type="button"
-                class="px-4 py-2 rounded-full bg-gray-100 text-slate-700 font-light whitespace-nowrap"
+                class="px-4 py-2 rounded-full bg-gray-100 text-slate-700 font-light whitespace-nowrap hover:bg-yellow-100 transition-colors"
                 hx-get="/provinces/search"
                 hx-target="#provinces-grid"
-                hx-include="[name='q']">
+                hx-include="[name='q']"
+                aria-label="Show all regions">
                 All Regions
             </button>
             {% for region in regions %}
             <button type="button"
-                class="px-4 py-2 rounded-full bg-gray-100 hover:bg-yellow-100 text-slate-700 font-light transition-all duration-300"
+                class="px-4 py-2 rounded-full bg-gray-100 hover:bg-yellow-100 text-slate-700 font-light transition-colors"
                 hx-get="/provinces/search"
                 hx-target="#provinces-grid"
                 hx-include="[name='q']"
@@ -44,48 +84,44 @@ Easy search and navigation by province.{% endblock %}
         </div>
     </nav>
 
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-2"
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4"
         id="provinces-filter">
-        <div role="search" class="relative w-full sm:w-96 lg:w-[32rem]"
+        <div role="search" class="relative w-full sm:w-[36rem] lg:w-[42rem]"
             id="search-container">
             <label for="province-search" class="sr-only">Search
                 provinces</label>
-            <div
-                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-                aria-hidden="true">
+            <div class="absolute inset-y-0 left-0 pl-6 flex items-center">
                 <img src="/static/icons/magnifying-glass-light.svg"
-                    class="h-5 w-5 opacity-70"
+                    class="h-6 w-6 opacity-80"
                     loading="eager"
                     fetchpriority="high">
             </div>
             <input type="text"
                 id="province-search"
                 name="q"
-                placeholder="Enter province name..."
-                class="w-full pl-10 pr-16 py-3 rounded-2xl border shadow-md focus:outline-none focus:ring-2 ring-yellow-800"
+                placeholder="Type a province name..."
+                class="w-full pl-16 pr-16 py-5 text-lg rounded-2xl border-2 border-gray-200 shadow-sm focus:outline-none focus:ring-2 ring-yellow-500 transition-all duration-200 placeholder:text-gray-400"
                 hx-get="/provinces/search"
-                hx-trigger="keyup changed delay:300ms"
+                hx-trigger="keyup changed delay:300ms, search"
                 hx-target="#provinces-grid"
-                hx-include="[name='province']"
-                hx-boost="true"
-                aria-label="Search provinces">
+                hx-include="[name='region']"
+                hx-boost="true">
             <button type="button"
-                class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer hover:opacity-80 transition-opacity"
                 id="clear-search"
+                class="absolute inset-y-0 right-0 pr-6 flex items-center cursor-pointer hover:opacity-80 transition-opacity"
                 onclick="clearSearch(this)"
-                aria-label="Clear province search">
+                aria-label="Clear search">
                 <img src="/static/icons/backspace-light.svg"
-                    class="h-5 w-5 opacity-80"
-                    alt="Clear search"
+                    class="h-6 w-6 opacity-80"
                     loading="eager">
             </button>
         </div>
 
         <div class="hidden sm:block relative w-full sm:w-auto"
-            id="select-container">
+            id="select-container" aria-label="Filter by region">
             <label for="region-select" class="sr-only">Filter by region</label>
             <select id="region-select"
-                class="appearance-none pl-6 pr-12 py-3 rounded-2xl border shadow-md focus:outline-none focus:ring-2 ring-yellow-800"
+                class="appearance-none pl-8 pr-14 py-5 text-lg rounded-2xl border-2 border-gray-200 shadow-sm focus:outline-none focus:ring-2 ring-yellow-500 transition-all duration-200 cursor-pointer bg-white/50 backdrop-blur-sm"
                 name="region"
                 hx-trigger="change"
                 hx-get="/provinces/search"
@@ -94,58 +130,53 @@ Easy search and navigation by province.{% endblock %}
                 hx-boost="true">
                 <option value>All Regions</option>
                 {% for region in regions %}
-                <option value="{{ region }}" {% if region==selected_region
-                    %}selected{% endif %}>
-                    {{ region }}
-                </option>
+                <option value="{{ region }}" {% if region == selected_region
+                    %}selected{% endif %}>{{ region }}</option>
                 {% endfor %}
             </select>
             <div
-                class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none"
-                aria-hidden="true">
+                class="absolute inset-y-0 right-0 pr-6 flex items-center pointer-events-none">
                 <img src="/static/icons/caret-down-light.svg"
-                    class="h-6 w-6 opacity-80"
-                    alt="Filter by region"
-                    loading="eager">
+                    class="h-6 w-6 opacity-80">
             </div>
         </div>
     </div>
 
-    <div id="provinces-grid"
+    <main id="provinces-grid"
         class="mt-6"
         role="region"
-        aria-label="Provinces list"
-        hx-boost="true">
+        aria-label="Provinces list">
         {% include "partials/provinces_grid.html" %}
-    </div>
+    </main>
 </div>
 
 <script>
-    function clearSearch(button) {
-        const input = button.parentElement.querySelector('input');
-        input.value = '';
-        htmx.trigger(input, 'keyup');
-        document.querySelector('select[name=region]').value = '';
-        htmx.trigger('select[name=region]', 'change');
-    }
+const clearSearch = (button) => {
+    const input = button.parentElement.querySelector('input');
+    const select = document.querySelector('select[name=region]');
+    input.value = '';
+    select.selectedIndex = 0;
+    
+    htmx.ajax('GET', '/provinces/search?q=&region=', {
+        target: '#provinces-grid',
+        swap: 'innerHTML'
+    });
+};
 
-    window.onload = function () {
-        const searchInput = document.querySelector('input[name="q"]');
-        if (searchInput) {
-            searchInput.value = '';
-        }
-        
-        const regionSelect = document.querySelector('select[name="region"]');
-        if (regionSelect) {
-            regionSelect.value = '';
-        }
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        const region = urlParams.get('region');
-        if (region) {
-            regionSelect.value = decodeURIComponent(region);
-            htmx.trigger(regionSelect, 'change');
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('input[name="q"]');
+    const regionSelect = document.querySelector('select[name="region"]');
+    
+    if (searchInput) {
+        searchInput.value = '';
     }
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const region = urlParams.get('region');
+    if (region && regionSelect) {
+        regionSelect.value = decodeURIComponent(region);
+        htmx.trigger(regionSelect, 'change');
+    }
+});
 </script>
 {% endblock %}

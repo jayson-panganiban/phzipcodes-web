@@ -1,50 +1,69 @@
 {% extends "base.html" %}
 
-{% block title %}Contact - Philippine Zipcodes{% endblock %}
+{% block title %}Say Hi! - Philippine Zipcodes{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-    <div class="text-center mb-6">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-medium mb-4 tracking-tight text-slate-900">
-            Get in Touch
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <div class="text-center mb-12">
+        <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-light mb-6 tracking-wide text-slate-900">
+            Let's Connect!
         </h1>
-        <p class="text-lg text-slate-600 font-light">Let's connect and make something great together</p>
     </div>
 
-    <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 sm:p-10 lg:p-12 border border-slate-100 mb-8 hover:shadow-2xl transition-all duration-500 ease-in-out">
-        <p class="font-light leading-relaxed text-lg text-slate-700 tracking-wide">
-            Whether you're sending packages, filling out forms, or just need to know a postal code - PH Zipcodes helps you find zip codes across the Philippines with ease. The data comes directly from PHLPost (Philippine Postal Corporation), the official postal service of the Philippines.
+    <div
+        class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm p-8 sm:p-10 lg:p-12 border border-gray-100 mb-12 hover:shadow-lg transition-all duration-300">
+        <p
+            class="font-light leading-relaxed text-xl text-slate-700 tracking-wide">
+            Hey there! 👋 I built this tool to make finding Philippine zip codes
+            easier for everyone. The data comes straight from PHLPost, keeping
+            things accurate and up-to-date. Feel free to reach out if you have
+            questions or just want to chat!
         </p>
     </div>
 
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-        <a href="mailto:jsoncp@proton.me"
-            class="w-full sm:w-auto flex items-center justify-center px-10 py-5 rounded-xl border bg-white/95 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
-            <img src="/static/icons/envelope-light.svg"
-                class="w-6 h-6 mr-4 opacity-80"
-                style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
-                aria-hidden="true">
-            <span class="font-light text-lg text-slate-700 group-hover:text-slate-900">Email</span>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="https://buymeacoffee.com/jsonpanganiban"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center p-8 rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-sm hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300 group">
+            <img src="/static/icons/coffee-light.svg"
+                class="w-7 h-7 mr-4 opacity-80 group-hover:opacity-100"
+                loading="lazy">
+            <span
+                class="font-light text-lg text-slate-700 group-hover:text-slate-900">Buy
+                me a coffee</span>
         </a>
+
+        <a href="mailto:jsoncp@proton.me"
+            class="flex items-center justify-center p-8 rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-sm hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300 group">
+            <img src="/static/icons/envelope-light.svg"
+                class="w-7 h-7 mr-4 opacity-80 group-hover:opacity-100"
+                loading="lazy">
+            <span
+                class="font-light text-lg text-slate-700 group-hover:text-slate-900">Email</span>
+        </a>
+
         <a href="https://linkedin.com/in/jayson-panganiban"
             target="_blank"
             rel="noopener noreferrer"
-            class="w-full sm:w-auto flex items-center justify-center px-10 py-5 rounded-xl border bg-white/95 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+            class="flex items-center justify-center p-8 rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-sm hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300 group">
             <img src="/static/icons/linkedin-logo-light.svg"
-                class="w-6 h-6 mr-4 opacity-80"
-                style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
-                aria-hidden="true">
-            <span class="font-light text-lg text-slate-700 group-hover:text-slate-900">LinkedIn</span>
+                class="w-7 h-7 mr-4 opacity-80 group-hover:opacity-100"
+                loading="lazy">
+            <span
+                class="font-light text-lg text-slate-700 group-hover:text-slate-900">LinkedIn</span>
         </a>
+
         <a href="https://github.com/jayson-panganiban"
             target="_blank"
             rel="noopener noreferrer"
-            class="w-full sm:w-auto flex items-center justify-center px-10 py-5 rounded-xl border bg-white/95 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+            class="flex items-center justify-center p-8 rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-sm hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300 group">
             <img src="/static/icons/github-logo-light.svg"
-                class="w-6 h-6 mr-4 opacity-80"
-                style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
-                aria-hidden="true">
-            <span class="font-light text-lg text-slate-700 group-hover:text-slate-900">GitHub</span>
+                class="w-7 h-7 mr-4 opacity-80 group-hover:opacity-100"
+                loading="lazy">
+            <span
+                class="font-light text-lg text-slate-700 group-hover:text-slate-900">GitHub</span>
         </a>
     </div>
 </div>

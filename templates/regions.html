@@ -1,76 +1,104 @@
 {% extends "base.html" %}
 
-{% block title %}Regions - Philippine Zipcodes{% endblock %}
-{% block meta_description %}Browse all regions in the Philippines from Luzon to
-Mindanao. Find postal codes by region.{% endblock %}
+{% block title %}Philippine Regions - Browse Zip Codes by Region{% endblock %}
+{% block description %}Navigate Philippine postal codes by region. Complete
+directory covering Luzon, Visayas, and Mindanao. Find official zip codes from
+PHLPost data.{% endblock %}
+{% block keywords %}philippine region postal codes, luzon zip codes, visayas
+postal codes, mindanao zip codes, regional post codes{% endblock %}
+
+{% block head %}
+<link rel="preload" href="/static/icons/magnifying-glass-light.svg" as="image"
+    fetchpriority="high">
+<link rel="preload" href="/static/icons/backspace-light.svg" as="image"
+    fetchpriority="high">
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Philippine Regions Directory",
+    "description": "Browse postal codes by region across the Philippines",
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Regions",
+            "item": "https://phzipcodes.com/regions"
+        }]
+    },
+    "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+            {
+                "@type": "AdministrativeArea",
+                "name": "Philippine Regions",
+                "description": "Complete directory of postal codes by region"
+            }
+        ]
+    }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="regions-page">
-    <div class="text-center mx-auto">
+    <header class="text-center mx-auto mb-4">
         <h1
-            class="text-2xl sm:text-3xl lg:text-4xl font-medium mb-4"
-            aria-level="1">
-            Philippine Regions
+            class="text-3xl sm:text-5xl lg:text-6xl font-light mb-6 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text">
+            Explore Philippine Regions
         </h1>
-        <p class="max-w-2xl mx-auto font-light text-slate-900 sm:text-lg mb-4">
-            Explore the diverse regions of the Philippines, from Luzon to
-            Mindanao
-        </p>
-    </div>
+    </header>
 
-    <div role="search" class="relative max-w-xl mx-auto" id="search-container">
+    <div role="search" class="relative max-w-3xl mx-auto mb-6">
         <label for="region-search" class="sr-only">Search regions</label>
-        <div
-            class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-            aria-hidden="true">
+        <div class="absolute inset-y-0 left-0 pl-6 flex items-center">
             <img src="/static/icons/magnifying-glass-light.svg"
-                class="h-5 w-5 opacity-80"
+                class="h-7 w-7 opacity-80"
                 loading="eager"
                 fetchpriority="high">
         </div>
         <input type="text"
             id="region-search"
             name="q"
-            placeholder="Enter region name..."
-            class="w-full pl-10 pr-16 py-3 rounded-xl border shadow-md focus:outline-none focus:ring-2 ring-yellow-800"
+            placeholder="Type a region name..."
+            class="w-full pl-16 pr-16 py-5 font-light text-lg rounded-2xl border-2 border-gray-200 shadow-sm focus:outline-none focus:ring-2 ring-yellow-500 transition-all duration-200 placeholder:text-gray-400"
             hx-get="/regions/search"
-            hx-trigger="keyup changed delay:300ms"
+            hx-trigger="keyup changed delay:300ms, search"
             hx-target="#regions-grid"
-            hx-boost="true"
-            aria-label="Search regions">
+            hx-boost="true">
         <button type="button"
-            class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer hover:opacity-80 transition-opacity"
+            class="absolute inset-y-0 right-0 pr-6 flex items-center cursor-pointer hover:opacity-80 transition-opacity"
             onclick="clearSearch(this)"
             aria-label="Clear region search">
             <img src="/static/icons/backspace-light.svg"
-                class="h-5 w-5 opacity-80"
-                alt="Clear search"
+                class="h-7 w-7 opacity-80"
                 loading="eager">
         </button>
     </div>
 
-    <div id="regions-grid"
+    <main id="regions-grid"
         class="mt-6"
         role="region"
-        aria-label="Regions list"
-        hx-boost="true">
+        aria-label="Regions list">
         {% include "partials/regions_grid.html" %}
-    </div>
+    </main>
 </div>
 
 <script>
-    function clearSearch(button) {
-        const input = button.parentElement.querySelector('input');
-        input.value = '';
-        htmx.trigger(input, 'keyup');
-    }
+const clearSearch = (button) => {
+    const input = button.parentElement.querySelector('input');
+    input.value = '';
+    htmx.trigger(input, 'search');
+};
 
-    window.onload = function () {
-        const searchInput = document.querySelector('input[name="q"]');
-        if (searchInput) {
-            searchInput.value = '';
-            htmx.trigger(searchInput, 'keyup');
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('input[name="q"]');
+    if (searchInput) {
+        searchInput.value = '';
+        htmx.trigger(searchInput, 'search');
     }
+});
 </script>
 {% endblock %}

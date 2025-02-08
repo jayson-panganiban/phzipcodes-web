@@ -1,34 +1,67 @@
 {% if municipalities %}
-<div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-3"
-    id="municipalities-grid" role="list">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+    id="municipalities-grid" role="list" itemscope
+    itemtype="https://schema.org/ItemList">
     {% for municipality in municipalities %}
+    <!-- Desktop version -->
     <div
-        class="p-5 sm:p-6 lg:p-7 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm border group transform transition-all duration-300"
-        role="listitem">
-        <div class="flex items-center justify-between">
-            <h2 class="sm:text-lg text-left tracking-wide text-slate-900">
-                {{ municipality.name }}
-            </h2>
-        </div>
-        <div class="flex items-center justify-between pt-4"
-            id="municipality-details">
-            <div
-                class="flex items-center text-sm font-light tracking-wide text-slate-900">
-                <img src="/static/icons/map-trifold-light.svg"
-                    class="w-4 h-4 mr-2 opacity-70"
-                    style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
-                    loading="lazy"
-                    aria-hidden="true">
-                <span>{{ municipality.province }}</span>
+        class="hidden sm:flex p-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300"
+        role="listitem"
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem"
+        id="municipality-card-{{ loop.index }}">
+        <meta itemprop="position" content="{{ loop.index }}">
+        <div class="w-full">
+            <div class="flex items-center justify-between">
+                <h2
+                    class="text-xl text-left tracking-wide text-slate-900 font-light"
+                    itemprop="name">{{ municipality.name }}</h2>
             </div>
-            <div class="flex items-center text-slate-900" aria-label="Zip code">
-                <img src="/static/icons/map-pin.svg"
-                    class="w-4 h-4 mr-2 opacity-70"
-                    style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
-                    loading="lazy"
-                    aria-hidden="true">
-                <span>{{ municipality.zipcode }}</span>
+            <div class="flex items-center justify-between pt-4">
+                <div
+                    class="flex items-center text-base font-light tracking-wide text-slate-700">
+                    <img src="/static/icons/map-trifold-light.svg"
+                        class="w-5 h-5 mr-3 opacity-80"
+                        loading="lazy">
+                    <span>{{ municipality.province }}</span>
+                </div>
+                <div class="flex items-center text-slate-900"
+                    aria-label="Zip code">
+                    <img src="/static/icons/map-pin.svg"
+                        class="w-5 h-5 mr-3 opacity-80"
+                        loading="lazy">
+                    <span class="font-light">{{ municipality.zipcode }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile version -->
+    <div
+        class="flex sm:hidden p-6 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100"
+        role="listitem"
+        id="municipality-card-mobile-{{ loop.index }}">
+        <div class="w-full">
+            <div class="flex items-center justify-between">
+                <h2
+                    class="text-lg text-left tracking-wide text-slate-900 font-light">
+                    {{ municipality.name }}</h2>
+            </div>
+            <div class="flex items-center justify-between pt-4">
+                <div
+                    class="flex items-center text-base font-light tracking-wide text-slate-700">
+                    <img src="/static/icons/map-trifold-light.svg"
+                        class="w-5 h-5 mr-3 opacity-80"
+                        loading="lazy">
+                    <span>{{ municipality.province }}</span>
+                </div>
+                <div class="flex items-center text-slate-900">
+                    <img src="/static/icons/map-pin.svg"
+                        class="w-5 h-5 mr-3 opacity-80"
+                        loading="lazy">
+                    <span class="font-light">{{ municipality.zipcode }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -36,22 +69,21 @@
 </div>
 
 {% else %}
-<div class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border" role="alert">
+<div
+    class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border border-gray-100 bg-white/95 backdrop-blur-sm"
+    role="alert">
     <div class="flex flex-col items-center">
         <img src="/static/icons/magnifying-glass-light.svg"
-            class="w-16 h-16 relative z-10 opacity-60 mb-4"
-            loading="lazy"
-            aria-hidden="true">
-        <h2 class="text-2xl font-light mb-4 tracking-wide">
-            No city or municipality found
-        </h2>
-        <div class="flex items-center justify-center gap-2 mt-4">
+            class="w-16 h-16 relative z-10 opacity-80 mb-4"
+            loading="lazy">
+        <h2 class="text-2xl font-light mb-4 tracking-wide text-slate-900">No
+            city or municipality found</h2>
+        <div class="flex items-center justify-center gap-5 mt-4">
             <img src="/static/icons/lightbulb-light.svg"
-                class="w-5 h-5 opacity-70"
-                loading="lazy"
-                aria-hidden="true">
-            <p class="font-light italic">Try adjusting your search using
-                different keyword</p>
+                class="w-5 h-5 opacity-80"
+                loading="lazy">
+            <p class="font-light italic text-slate-700">Try adjusting your
+                search using different keywords</p>
         </div>
     </div>
 </div>

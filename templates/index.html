@@ -54,14 +54,17 @@ directory, city postal codes, municipality zip codes{% endblock %}
             <div class="relative mx-auto" id="search-container">
                 <label for="location-search" class="sr-only">Search
                     locations</label>
-                <div
+                <button
+                    type="button"
+                    aria-label="Search locations or zipcode"
                     class="absolute inset-y-0 left-0 pl-6 flex items-center cursor-pointer"
-                    id="search-icon">
+                    aria-label="Search">
                     <img src="/static/icons/magnifying-glass-light.svg"
-                        class="h-6 w-6 opacity-80"
+                        class="h-7 w-7 opacity-80"
                         loading="eager"
-                        fetchpriority="high">
-                </div>
+                        fetchpriority="high"
+                        alt="Search icon">
+                </button>
                 <input type="text"
                     id="location-search"
                     name="q"
@@ -81,7 +84,7 @@ directory, city postal codes, municipality zip codes{% endblock %}
                     onclick="clearSearch(this)"
                     aria-label="Clear search input">
                     <img src="/static/icons/backspace-light.svg"
-                        class="h-6 w-6 opacity-80"
+                        class="h-7 w-7 opacity-80"
                         loading="eager">
                 </button>
             </div>

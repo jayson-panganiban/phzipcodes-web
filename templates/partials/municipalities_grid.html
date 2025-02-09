@@ -1,16 +1,18 @@
 {% if municipalities %}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-    id="municipalities-grid" role="list" itemscope
+    role="list"
+    aria-label="Municipalities list"
+    itemscope
     itemtype="https://schema.org/ItemList">
     {% for municipality in municipalities %}
     <!-- Desktop version -->
     <div
-        class="hidden sm:flex p-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300"
+        class="hidden sm:flex p-8 pr-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300"
         role="listitem"
+        tabindex="0"
         itemprop="itemListElement"
         itemscope
-        itemtype="https://schema.org/ListItem"
-        id="municipality-card-{{ loop.index }}">
+        itemtype="https://schema.org/ListItem">
         <meta itemprop="position" content="{{ loop.index }}">
         <div class="w-full">
             <div class="flex items-center justify-between">
@@ -18,17 +20,21 @@
                     class="text-xl text-left tracking-wide text-slate-900 font-light"
                     itemprop="name">{{ municipality.name }}</h2>
             </div>
-            <div class="flex items-center justify-between pt-4">
+            <div class="flex items-center justify-between pt-4"
+                id="municipality-details">
                 <div
-                    class="flex items-center text-base font-light tracking-wide text-slate-700">
+                    class="flex items-center text-sm font-light tracking-wide text-slate-700"
+                    aria-label="Province: {{ municipality.province }}">
                     <img src="/static/icons/map-trifold-light.svg"
+                        alt="Province icon"
                         class="w-5 h-5 mr-3 opacity-80"
                         loading="lazy">
                     <span>{{ municipality.province }}</span>
                 </div>
                 <div class="flex items-center text-slate-900"
-                    aria-label="Zip code">
+                    aria-label="Zip code: {{ municipality.zipcode }}">
                     <img src="/static/icons/map-pin.svg"
+                        alt="Zip code icon"
                         class="w-5 h-5 mr-3 opacity-80"
                         loading="lazy">
                     <span class="font-light">{{ municipality.zipcode }}</span>
@@ -39,9 +45,9 @@
 
     <!-- Mobile version -->
     <div
-        class="flex sm:hidden p-6 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100"
+        class="flex sm:hidden p-6 pr-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100"
         role="listitem"
-        id="municipality-card-mobile-{{ loop.index }}">
+        tabindex="0">
         <div class="w-full">
             <div class="flex items-center justify-between">
                 <h2
@@ -50,14 +56,18 @@
             </div>
             <div class="flex items-center justify-between pt-4">
                 <div
-                    class="flex items-center text-base font-light tracking-wide text-slate-700">
+                    class="flex items-center text-sm font-light tracking-wide text-slate-700"
+                    aria-label="Province: {{ municipality.province }}">
                     <img src="/static/icons/map-trifold-light.svg"
+                        alt="Province icon"
                         class="w-5 h-5 mr-3 opacity-80"
                         loading="lazy">
                     <span>{{ municipality.province }}</span>
                 </div>
-                <div class="flex items-center text-slate-900">
+                <div class="flex items-center text-slate-900"
+                    aria-label="Zip code: {{ municipality.zipcode }}">
                     <img src="/static/icons/map-pin.svg"
+                        alt="Zip code icon"
                         class="w-5 h-5 mr-3 opacity-80"
                         loading="lazy">
                     <span class="font-light">{{ municipality.zipcode }}</span>
@@ -71,15 +81,18 @@
 {% else %}
 <div
     class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border border-gray-100 bg-white/95 backdrop-blur-sm"
-    role="alert">
+    role="alert"
+    aria-live="polite">
     <div class="flex flex-col items-center">
         <img src="/static/icons/magnifying-glass-light.svg"
+            alt="Search not found icon"
             class="w-16 h-16 relative z-10 opacity-80 mb-4"
             loading="lazy">
         <h2 class="text-2xl font-light mb-4 tracking-wide text-slate-900">No
             city or municipality found</h2>
         <div class="flex items-center justify-center gap-5 mt-4">
             <img src="/static/icons/lightbulb-light.svg"
+                alt="Tip icon"
                 class="w-5 h-5 opacity-80"
                 loading="lazy">
             <p class="font-light italic text-slate-700">Try adjusting your

@@ -44,7 +44,8 @@ postal codes, mindanao zip codes, regional post codes{% endblock %}
 
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="regions-page">
-    <header class="text-center mx-auto mb-4">
+    <header class="text-center mx-auto mb-4" role="banner"
+        aria-label="Page header">
         <h1
             class="text-3xl sm:text-5xl lg:text-6xl font-light mb-6 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text">
             Explore Philippine Regions
@@ -53,12 +54,15 @@ postal codes, mindanao zip codes, regional post codes{% endblock %}
 
     <div role="search" class="relative max-w-3xl mx-auto mb-6">
         <label for="region-search" class="sr-only">Search regions</label>
-        <div class="absolute inset-y-0 left-0 pl-6 flex items-center">
+        <button type="button"
+            aria-label="Search regions"
+            class="absolute inset-y-0 left-0 pl-6 flex items-center">
             <img src="/static/icons/magnifying-glass-light.svg"
                 class="h-7 w-7 opacity-80"
                 loading="eager"
-                fetchpriority="high">
-        </div>
+                fetchpriority="high"
+                alt="Search icon">
+        </button>
         <input type="text"
             id="region-search"
             name="q"
@@ -74,14 +78,15 @@ postal codes, mindanao zip codes, regional post codes{% endblock %}
             aria-label="Clear region search">
             <img src="/static/icons/backspace-light.svg"
                 class="h-7 w-7 opacity-80"
-                loading="eager">
+                loading="eager"
+                alt="Clear search icon">
         </button>
     </div>
 
     <main id="regions-grid"
         class="mt-6"
         role="region"
-        aria-label="Regions list">
+        aria-label="Regions Content">
         {% include "partials/regions_grid.html" %}
     </main>
 </div>

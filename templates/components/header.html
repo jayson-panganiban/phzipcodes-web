@@ -1,5 +1,35 @@
-<header role="banner" class="sticky top-0 z-50">
-    <nav
+<style>
+.smoke {
+    position: relative;
+}
+
+.smoke::before {
+    content: "~";
+    position: absolute;
+    top: -8px;
+    left: 4px;
+    color: #fbbf24;
+    opacity: 0;
+    animation: rise 2s infinite;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-10px) rotate(45deg);
+        opacity: 0;
+    }
+}
+</style>
+
+<header role="banner" aria-label="Site header" class="sticky top-0 z-50">
+    <nav role="navigation" aria-label="Site navigation"
         class="nav-gradient px-4 sm:px-6 lg:px-8 py-6 shadow-xl relative overflow-hidden backdrop-blur-sm">
         <div class="container mx-auto relative">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
@@ -8,7 +38,7 @@
                     aria-label="Home">
                     <img src="/static/icons/philippines.svg"
                         class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 group-hover:rotate-12 transition-transform duration-300"
-                        alt="Philippines"
+                        alt="Philippines map icon"
                         loading="eager"
                         fetchpriority="high">
                     <span
@@ -17,7 +47,8 @@
                     </span>
                 </a>
 
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4" role="group"
+                    aria-label="Site actions">
                     <a href="/contact"
                         class="text-white inline-flex items-center px-8 py-3 text-base sm:text-lg font-light hover:text-yellow-500 transition-all duration-300 rounded-xl hover:bg-white/10 hover:scale-105 backdrop-blur-sm">
                         Contact
@@ -27,12 +58,14 @@
                         rel="noopener noreferrer"
                         class="hidden sm:inline-flex items-center px-6 py-3 text-base font-light text-yellow-500 hover:scale-105 transition-all duration-300 rounded-xl backdrop-blur-sm group"
                         aria-label="Support via Buy Me a Coffee">
-                        <img src="/static/icons/coffee-light.svg"
-                            class="w-5 h-5 mr-2"
-                            style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
-                            loading="eager"
-                            fetchpriority="high"
-                            alt>
+                        <div class="smoke">
+                            <img src="/static/icons/coffee-light.svg"
+                                class="w-5 h-5 mr-2"
+                                alt="Coffee cup icon"
+                                style="filter: invert(70%) sepia(75%) saturate(1000%) hue-rotate(360deg) brightness(100%) contrast(90%);"
+                                loading="eager"
+                                fetchpriority="high">
+                        </div>
                         <span>Buy me a coffee</span>
                     </a>
                 </div>

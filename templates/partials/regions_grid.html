@@ -1,17 +1,19 @@
 {% if regions %}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-    id="regions-grid" role="list" itemscope
+    role="list"
+    aria-label="Regions list"
+    itemscope
     itemtype="https://schema.org/ItemList">
     {% for region in regions|sort %}
     <!-- Desktop version -->
     <a href="/provinces?region={{ region|urlencode }}"
-        class="hidden sm:flex p-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300 group"
+        class="hidden sm:flex p-8 pr-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300 group"
         role="listitem"
+        tabindex="0"
         itemprop="itemListElement"
         itemscope
         itemtype="https://schema.org/ListItem"
         aria-label="View provinces in {{ region }}"
-        id="region-card-{{ loop.index }}"
         hx-boost="true">
         <meta itemprop="position" content="{{ loop.index }}">
         <meta itemprop="description"
@@ -25,42 +27,41 @@
                     class="text-xl text-left tracking-wide text-slate-900 font-light"
                     itemprop="name">{{ region }}</h2>
                 <img src="/static/icons/caret-right-light.svg"
+                    alt="View region details"
                     class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     loading="lazy">
             </div>
-            <div class="flex items-center justify-between pt-4">
-                <div
-                    class="flex items-center text-base font-light tracking-wide text-slate-700">
-                    <img src="/static/icons/map-trifold-light.svg"
-                        class="w-5 h-5 mr-3 opacity-80"
-                        loading="lazy">
-                    <span>View all provinces in this region</span>
-                </div>
+            <div
+                class="flex items-center text-sm font-light tracking-wide text-slate-700 pt-4">
+                <img src="/static/icons/map-trifold-light.svg"
+                    alt="Region icon"
+                    class="w-5 h-5 mr-3 opacity-80"
+                    loading="lazy">
+                <span>View all provinces in this region</span>
             </div>
         </div>
     </a>
 
     <!-- Mobile version -->
     <a href="/provinces?region={{ region|urlencode }}"
-        class="p-6 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 flex sm:hidden flex-col"
+        class="p-6 pr-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 flex sm:hidden flex-col"
         role="listitem"
+        tabindex="0"
         aria-label="View provinces in {{ region }}"
-        id="region-card-mobile-{{ loop.index }}"
         hx-boost="true">
         <div class="w-full">
             <div class="flex items-center justify-between">
                 <h2
-                    class="text-lg text-left tracking-wide text-slate-900 font-light">{{
-                    region }}</h2>
+                    class="text-lg text-left tracking-wide text-slate-900 font-light">
+                    {{ region }}</h2>
             </div>
-            <div class="flex items-center justify-between pt-4">
-                <div
-                    class="flex items-center text-base font-light tracking-wide text-slate-700">
-                    <img src="/static/icons/map-trifold-light.svg"
-                        class="w-5 h-5 mr-3 opacity-80"
-                        loading="lazy">
-                    <span>View all provinces in this region</span>
-                </div>
+            <div
+                class="flex items-center text-sm font-light tracking-wide text-slate-700 pt-4">
+                <img src="/static/icons/map-trifold-light.svg"
+                    alt="Region icon"
+                    class="w-5 h-5 mr-3 opacity-80"
+                    loading="lazy">
+                <span>View all provinces in this region</span>
             </div>
         </div>
     </a>
@@ -70,15 +71,18 @@
 {% else %}
 <div
     class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border border-gray-100 bg-white/95 backdrop-blur-sm"
-    role="alert">
+    role="alert"
+    aria-live="polite">
     <div class="flex flex-col items-center">
         <img src="/static/icons/magnifying-glass-light.svg"
+            alt="Search not found icon"
             class="w-16 h-16 relative z-10 opacity-80 mb-4"
             loading="lazy">
         <h2 class="text-2xl font-light mb-4 tracking-wide text-slate-900">No
             regions found</h2>
         <div class="flex items-center justify-center gap-5 mt-4">
             <img src="/static/icons/lightbulb-light.svg"
+                alt="Tip icon"
                 class="w-5 h-5 opacity-80"
                 loading="lazy">
             <p class="font-light italic text-slate-700">Try adjusting your

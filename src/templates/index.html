@@ -94,7 +94,6 @@ city postal codes, municipality zip codes{% endblock %} {% block head %}
           hx-trigger="keyup changed delay:300ms"
           hx-target="#results"
           hx-swap="innerHTML"
-          hx-indicator="#search-indicator"
         />
         <button
           type="button"
@@ -109,14 +108,6 @@ city postal codes, municipality zip codes{% endblock %} {% block head %}
             loading="eager"
           />
         </button>
-      </div>
-
-      <div id="search-indicator" class="htmx-indicator">
-        <div class="flex justify-center">
-          <div
-            class="animate-spin rounded-full h-6 w-6 border-b-2 border-yellow-500"
-          ></div>
-        </div>
       </div>
 
       <div

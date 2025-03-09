@@ -92,3 +92,67 @@ class TestHome:
         for icon in preloaded_icons:
             link = page.locator(f"link[rel='preload'][href='{icon}']")
             await expect(link).to_be_attached()
+
+    @pytest.mark.asyncio
+    async def test_search_and_clear_functionality(self, page):
+        """Test search functionality and clear button."""
+
+        # Get the search input
+        search_input = page.get_by_role("searchbox", name="Search locations")
+
+        # Verify initial state
+        await expect(search_input).to_be_visible()
+        await expect(search_input).to_have_value("")
+
+        # Type a search query
+        test_query = "Manila"
+        await search_input.type(test_query)
+        await expect(search_input).to_have_value(test_query)
+
+        # Wait for search results
+        results_container = page.locator("#results")
+
+        # Check if results are displayed
+        results_header = page.locator("#results-header")
+        await expect(results_header).to_be_visible()
+
+        # Get the clear button and click it
+        clear_button = page.get_by_role("button", name="Clear search input")
+        await expect(clear_button).to_be_visible()
+        await clear_button.click()
+
+        # Verify that the input is cleared
+        await expect(search_input).to_have_value("")
+
+        # Verify results are no longer visible
+        await expect(results_container.locator("div")).to_have_count(0)
+
+    @pytest.mark.asyncio
+    async def test_search_with_zipcode(self, page):
+        """Test searching with a zipcode."""
+
+        # Get the search input
+        search_input = page.get_by_role("searchbox", name="Search locations")
+
+        # Type a zipcode
+        test_zipcode = "1000"
+        await search_input.type(test_zipcode)
+        await expect(search_input).to_have_value(test_zipcode)
+
+        # Wait for search results
+        results_container = page.locator("#results")
+
+        # Check if results are displayed
+        zip_badge = page.locator(".zip-badge")
+        await expect(zip_badge).to_be_visible()
+
+        # Verify the zipcode is found in the results
+        await expect(page.locator(".zip-badge")).to_contain_text(test_zipcode)
+
+        # Clear the search using the clear button
+        clear_button = page.get_by_role("button", name="Clear search input")
+        await clear_button.click()
+
+        # Verify that the search is reset
+        await expect(search_input).to_have_value("")
+        await expect(results_container.locator("div")).to_have_count(0)

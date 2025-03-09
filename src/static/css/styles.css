@@ -1,0 +1,20 @@
+:root {
+  --color-primary: #0f172a;
+  --color-secondary: #334155;
+  --color-accent: #fbbf24;
+  --color-text-light: #ffffff;
+  --color-text-dark: #0f172a;
+}
+
+body {
+  color: var(--color-text-dark);
+  background-color: var(--color-text-light);
+}
+
+.nav-gradient {
+  background: linear-gradient(
+    87.54deg,
+    var(--color-primary) -6.8%,
+    var(--color-secondary) 84.14%
+  );
+}

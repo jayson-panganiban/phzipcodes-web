@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>
+      {% block title %}Philippine Zipcodes - Complete Postal Code Directory{%
+      endblock %}
+    </title>
+    <meta
+      name="description"
+      content="{% block description %}Official Philippine postal codes directory. Search zip codes by city, municipality, province, or region. Updated postal codes from PHLPost.{% endblock %}"
+    />
+    <meta
+      name="keywords"
+      content="philippines postal code, zip code finder, philippine address, postal code directory, philippine cities, municipality codes, PHLPost, {% block keywords %}{% endblock %}"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://phzipcodes.com{{ request.path }}"
+    />
+    <meta
+      property="og:title"
+      content="{% block og_title %}Philippine Zipcodes{% endblock %}"
+    />
+    <meta
+      property="og:description"
+      content="{% block og_description %}Find Philippine postal codes easily{% endblock %}"
+    />
+    <meta
+      property="og:image"
+      content="https://phzipcodes.com/static/images/og-image.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://phzipcodes.com{{ request.path }}"
+    />
+    <meta name="twitter:title" content="{{ self.title() }}" />
+    <meta name="twitter:description" content="{{ self.description() }}" />
+    <meta
+      name="twitter:image"
+      content="https://phzipcodes.com/static/images/og-image.jpg"
+    />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://phzipcodes.com{{ request.path }}" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Security -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';"
+    />
+
+    <!-- Critical CSS -->
+    <link
+      rel="preload"
+      href="/static/css/tailwind.min.css"
+      as="style"
+      fetchpriority="high"
+    />
+    <link href="/static/css/tailwind.min.css" rel="stylesheet" />
+
+    <!-- HTMX -->
+    <link
+      rel="preload"
+      href="/static/js/htmx.min.js"
+      as="script"
+      fetchpriority="high"
+    />
+    <script src="/static/js/htmx.min.js" defer></script>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "PH Zipcodes",
+        "url": "https://phzipcodes.com",
+        "description": "Find Philippine postal codes easily",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://phzipcodes.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    {% block head %}{% endblock %}
+
+    <!-- Deferred CSS -->
+    <link href="/static/css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    {% include 'components/header.html' %}
+    <main role="main" class="container mx-auto px-4 py-6 lg:py-8 flex-grow">
+      {% block content %}{% endblock %}
+    </main>
+    {% include 'components/footer.html' %} {% include
+    'components/back_to_top.html' %}
+  </body>
+</html>

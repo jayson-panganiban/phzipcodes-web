@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Philippine Provinces - Browse Postal Codes by Province{%
+endblock %}
+{% block description %}Find zip codes across Philippine provinces. Easy
+navigation through complete postal code listings by province. Official PHLPost
+data.{% endblock %}
+{% block keywords %}philippine province postal codes, provincial zip codes,
+PHLPost province directory, local postal codes{% endblock %}
+
+{% block head %}
+<link rel="preload" href="/static/icons/magnifying-glass-light.svg" as="image"
+    fetchpriority="high">
+<link rel="preload" href="/static/icons/backspace-light.svg" as="image"
+    fetchpriority="high">
+<link rel="preload" href="/static/icons/caret-down-light.svg" as="image"
+    fetchpriority="high">
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Philippine Provinces Directory",
+    "description": "Browse postal codes by province",
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Provinces",
+            "item": "https://phzipcodes.com/provinces"
+        }]
+    },
+    "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Browse by Province",
+                "description": "Find postal codes for any Philippine province"
+            }
+        ]
+    }
+}
+</script>
+{% endblock %}
+
+[Rest of the existing provinces.html content remains the same...]
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="provinces-page">
+    <header class="text-center mx-auto mb-4" role="banner"
+        aria-label="Page header">
+        <h1
+            class="text-3xl sm:text-5xl lg:text-6xl font-light mb-6 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text">
+            Explore Philippine Provinces
+        </h1>
+    </header>
+    <nav
+        class="sm:hidden overflow-x-auto whitespace-nowrap py-2 scrollbar-hide mb-2 -mx-4 px-4"
+        id="provinces-pills"
+        role="navigation"
+        aria-label="Region filters">
+        <div class="inline-flex space-x-2">
+            <button type="button"
+                class="px-4 py-2 rounded-full bg-gray-100 text-slate-700 font-light whitespace-nowrap hover:bg-yellow-100 transition-colors"
+                hx-get="/provinces/search"
+                hx-target="#provinces-grid"
+                hx-include="[name='q']"
+                aria-label="Show all regions">
+                All Regions
+            </button>
+            {% for region in regions %}
+            <button type="button"
+                class="px-4 py-2 rounded-full bg-gray-100 hover:bg-yellow-100 text-slate-700 font-light transition-colors"
+                hx-get="/provinces/search"
+                hx-target="#provinces-grid"
+                hx-include="[name='q']"
+                hx-vals='{"region": "{{ region }}"}'
+                aria-label="Filter by {{ region }}">
+                {{ region }}
+            </button>
+            {% endfor %}
+        </div>
+    </nav>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4"
+        id="provinces-filter"
+        aria-label="Region filters">
+        <div class="relative w-full sm:w-96 lg:w-[32rem]" id="search-container">
+            <label for="province-search" class="sr-only">Search
+                provinces</label>
+            <button type="button"
+                aria-label="Search provinces"
+                class="absolute inset-y-0 left-0 pl-6 flex items-center">
+                <img src="/static/icons/magnifying-glass-light.svg"
+                    class="h-7 w-7 opacity-80"
+                    loading="eager"
+                    fetchpriority="high"
+                    alt="Search icon">
+            </button>
+            <input type="text"
+                id="province-search" `
+                name="q"
+                placeholder="Type a province name..."
+                class="w-full pl-16 pr-16 py-5 text-lg rounded-2xl border-2 border-gray-200 shadow-sm focus:outline-none focus:ring-2 ring-yellow-500 transition-all duration-200 placeholder:text-gray-400"
+                hx-get="/provinces/search"
+                hx-trigger="keyup changed delay:300ms, search"
+                hx-target="#provinces-grid"
+                hx-include="[name='region']"
+                hx-boost="true">
+            <button type="button"
+                class="absolute inset-y-0 right-0 pr-6 flex items-center cursor-pointer hover:opacity-80 transition-opacity"
+                onclick="clearSearch(this)"
+                aria-label="Clear province search">
+                <img src="/static/icons/backspace-light.svg"
+                    class="h-7 w-7 opacity-80"
+                    loading="eager"
+                    alt="Clear search icon">
+            </button>
+        </div>
+
+        <div class="hidden sm:block relative w-full sm:w-auto"
+            id="select-container">
+            <label for="region-select" class="sr-only">Filter by region</label>
+            <select
+                class="appearance-none pl-8 pr-14 py-5 text-lg rounded-2xl border-2 border-gray-200 shadow-sm focus:outline-none focus:ring-2 ring-yellow-500 transition-all duration-200 cursor-pointer bg-white/50 backdrop-blur-sm"
+                name="region"
+                hx-trigger="change"
+                hx-get="/provinces/search"
+                hx-target="#provinces-grid"
+                hx-include="[name='q']"
+                hx-boost="true"
+                aria-label="Filter by region">
+                <option value>All Regions</option>
+                {% for region in regions %}
+                <option value="{{ region }}" {% if region == selected_region
+                    %}selected{% endif %}>{{ region }}</option>
+                {% endfor %}
+            </select>
+            <div
+                class="absolute inset-y-0 right-0 pr-6 flex items-center pointer-events-none">
+                <img src="/static/icons/caret-down-light.svg"
+                    class="h-6 w-6 opacity-80">
+            </div>
+        </div>
+    </div>
+
+    <main id="provinces-grid"
+        class="mt-6"
+        role="region"
+        aria-label="Provinces Content">
+        {% include "partials/provinces_grid.html" %}
+    </main>
+</div>
+
+<script>
+const clearSearch = (button) => {
+    const input = button.parentElement.querySelector('input');
+    const select = document.querySelector('select[name=region]');
+    input.value = '';
+    select.selectedIndex = 0;
+    
+    htmx.ajax('GET', '/provinces/search?q=&region=', {
+        target: '#provinces-grid',
+        swap: 'innerHTML'
+    });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('input[name="q"]');
+    const regionSelect = document.querySelector('select[name="region"]');
+    
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const region = urlParams.get('region');
+    if (region && regionSelect) {
+        regionSelect.value = decodeURIComponent(region);
+        htmx.trigger(regionSelect, 'change');
+    }
+});
+</script>
+{% endblock %}

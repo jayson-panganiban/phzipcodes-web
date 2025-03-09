@@ -1,0 +1,127 @@
+{% if provinces %}
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+  role="list"
+  aria-label="Provinces list"
+  itemscope
+  itemtype="https://schema.org/ItemList"
+>
+  {% for province in provinces|sort %}
+  <!-- Desktop version -->
+  <a
+    href="/municipalities?province={{ province|urlencode }}"
+    class="hidden sm:flex p-8 pr-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-yellow-500 hover:-translate-y-1 transition-all duration-300 group"
+    role="listitem"
+    tabindex="0"
+    itemprop="itemListElement"
+    itemscope
+    itemtype="https://schema.org/ListItem"
+    aria-label="View municipalities in {{ province }}"
+    hx-boost="true"
+  >
+    <meta itemprop="position" content="{{ loop.index }}" />
+    <meta
+      itemprop="description"
+      content="Find postal codes in {{ province }}"
+    />
+    <link
+      itemprop="url"
+      href="https://phzipcodes.com/municipalities?province={{ province|urlencode }}"
+    />
+
+    <div class="w-full">
+      <div class="flex items-center justify-between">
+        <h2
+          class="text-xl text-left tracking-wide text-slate-900 font-light"
+          itemprop="name"
+        >
+          {{ province }}
+        </h2>
+        <img
+          src="/static/icons/caret-right-light.svg"
+          alt="View province details"
+          class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          loading="lazy"
+        />
+      </div>
+      <div class="flex items-center justify-between pt-4">
+        <div
+          class="flex items-center text-sm font-light tracking-wide text-slate-700"
+          aria-label="Explore cities and municipalities in {{ province }}"
+        >
+          <img
+            src="/static/icons/city-light.svg"
+            alt="Municipality icon"
+            class="w-5 h-5 mr-3 opacity-80"
+            loading="lazy"
+          />
+          <span>Explore cities and municipalities</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Mobile version -->
+  <a
+    href="/municipalities?province={{ province|urlencode }}"
+    class="p-6 pr-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 flex sm:hidden flex-col"
+    role="listitem"
+    tabindex="0"
+    aria-label="View municipalities in {{ province }}"
+    hx-boost="true"
+  >
+    <div class="w-full">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg text-left tracking-wide text-slate-900 font-light">
+          {{ province }}
+        </h2>
+      </div>
+      <div class="flex items-center justify-between pt-4">
+        <div
+          class="flex items-center text-sm font-light tracking-wide text-slate-700"
+          aria-label="Explore cities and municipalities in {{ province }}"
+        >
+          <img
+            src="/static/icons/city-light.svg"
+            alt="Municipality icon"
+            class="w-5 h-5 mr-3 opacity-80"
+            loading="lazy"
+          />
+          <span>Explore cities and municipalities</span>
+        </div>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+{% else %}
+<div
+  class="rounded-2xl shadow-lg p-12 max-w-3xl mx-auto border border-gray-100 bg-white/95 backdrop-blur-sm"
+  role="alert"
+  aria-live="polite"
+>
+  <div class="flex flex-col items-center">
+    <img
+      src="/static/icons/magnifying-glass-light.svg"
+      alt="Search not found icon"
+      class="w-16 h-16 relative z-10 opacity-80 mb-4"
+      loading="lazy"
+    />
+    <h2 class="text-2xl font-light mb-4 tracking-wide text-slate-900">
+      No provinces found
+    </h2>
+    <div class="flex items-center justify-center gap-5 mt-4">
+      <img
+        src="/static/icons/lightbulb-light.svg"
+        alt="Tip icon"
+        class="w-5 h-5 opacity-80"
+        loading="lazy"
+      />
+      <p class="font-light italic text-slate-700">
+        Try adjusting your search using different keywords
+      </p>
+    </div>
+  </div>
+</div>
+{% endif %}

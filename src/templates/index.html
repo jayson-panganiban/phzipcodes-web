@@ -1,0 +1,197 @@
+{% extends "base.html" %} {% block title %}Philippine Zip Codes - Fast &
+Official Postal Code Search{% endblock %} {% block description %}Search
+Philippine zip codes instantly. Find postal codes for any city, municipality, or
+region. Official data from PHLPost, updated regularly.{% endblock %} {% block
+keywords %}philippine zip code search, postal code lookup, PHLPost directory,
+city postal codes, municipality zip codes{% endblock %} {% block head %}
+<link
+  rel="preload"
+  href="/static/icons/magnifying-glass-light.svg"
+  as="image"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  href="/static/icons/backspace-light.svg"
+  as="image"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  href="/static/icons/island-duotone.svg"
+  as="image"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  href="/static/icons/map-trifold-duotone.svg"
+  as="image"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  href="/static/icons/city-duotone.svg"
+  as="image"
+  fetchpriority="high"
+/>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PH Zipcodes",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0"
+    },
+    "featureList": [
+      "Search by city or municipality name",
+      "Browse by region or province",
+      "Official PHLPost data",
+      "Regular updates"
+    ]
+  }
+</script>
+{% endblock %} {% block content %}
+<div class="flex items-center justify-center overflow-y-auto">
+  <div class="max-w-4xl w-full mx-auto text-center px-4 mt-4" id="main-content">
+    <h1
+      aria-level="1"
+      aria-label="Philippines Zip Codes"
+      class="text-4xl sm:text-5xl lg:text-6xl mb-10 tracking-tight"
+    >
+      Find Philippine Zip Codes
+    </h1>
+    <div role="search" class="max-w-3xl mx-auto" aria-label="Search locations">
+      <div class="relative mx-auto" id="search-container">
+        <label for="location-search" class="sr-only">Search locations</label>
+        <button
+          type="button"
+          aria-label="Search locations or zipcode"
+          class="absolute inset-y-0 left-0 pl-6 flex items-center cursor-pointer"
+          aria-label="Search"
+        >
+          <img
+            src="/static/icons/magnifying-glass-light.svg"
+            class="h-7 w-7 opacity-80"
+            loading="eager"
+            fetchpriority="high"
+            alt="Search icon"
+          />
+        </button>
+        <input
+          type="text"
+          id="location-search"
+          name="q"
+          aria-label="Search locations"
+          autocomplete="off"
+          role="searchbox"
+          placeholder="Enter location or zipcode..."
+          class="w-full pl-16 pr-16 py-5 text-lg rounded-2xl border-2 border-gray-200 shadow-sm focus:outline-none focus:ring-2 ring-yellow-500 transition-all duration-200 placeholder:text-gray-400"
+          hx-get="/search"
+          hx-trigger="keyup changed delay:300ms"
+          hx-target="#results"
+          hx-swap="innerHTML"
+          hx-indicator="#search-indicator"
+        />
+        <button
+          type="button"
+          id="clear-search"
+          class="absolute inset-y-0 right-0 pr-6 flex items-center cursor-pointer hover:opacity-80 transition-opacity"
+          onclick="clearSearch(this)"
+          aria-label="Clear search input"
+        >
+          <img
+            src="/static/icons/backspace-light.svg"
+            class="h-7 w-7 opacity-80"
+            loading="eager"
+          />
+        </button>
+      </div>
+
+      <div id="search-indicator" class="htmx-indicator">
+        <div class="flex justify-center">
+          <div
+            class="animate-spin rounded-full h-6 w-6 border-b-2 border-yellow-500"
+          ></div>
+        </div>
+      </div>
+
+      <div
+        id="results"
+        aria-live="polite"
+        role="region"
+        aria-label="Search results"
+      ></div>
+    </div>
+
+    <nav
+      role="navigation"
+      aria-label="Main categories"
+      class="flex flex-col items-center justify-center mx-auto mt-4"
+    >
+      <div
+        class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full max-w-lg"
+      >
+        {% for item in [ {'href': '/regions', 'icon': 'island-duotone.svg',
+        'text': 'Browse Regions'}, {'href': '/provinces', 'icon':
+        'map-trifold-duotone.svg', 'text': 'Browse Provinces'}, {'href':
+        '/municipalities', 'icon': 'city-duotone.svg', 'text': 'Browse
+        Municipalities'} ] %}
+        <a
+          href="{{ item.href }}"
+          class="p-6 sm:p-7 flex flex-col items-center rounded-2xl shadow-sm border sm:hover:shadow-lg sm:hover:border-yellow-500 sm:transition-all sm:duration-300 sm:transform sm:hover:-translate-y-1"
+        >
+          <img
+            src="/static/icons/{{ item.icon }}"
+            class="w-6 h-6 sm:w-7 sm:h-7 mb-3"
+            loading="eager"
+          />
+          <span class="font-light text-md text-slate-900 tracking-wide"
+            >{{ item.text }}</span
+          >
+        </a>
+        {% endfor %}
+      </div>
+    </nav>
+
+    <aside role="complementary" class="mt-8 p-3 max-w-xl mx-auto">
+      <div class="flex items-start gap-2">
+        <img
+          src="/static/icons/lightbulb-light.svg"
+          class="w-4 h-4 mt-0.5 opacity-70"
+          loading="lazy"
+        />
+        <div class="text-left">
+          <h2 class="text-sm text-slate-900">Quick Tip</h2>
+          <p class="mt-1 text-sm font-light text-slate-900 italic">
+            Try searching by city name, municipality, or directly enter a zip
+            code (e.g. 4117) to find locations.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+  const clearSearch = (button) => {
+    const input = button.parentElement.querySelector("input");
+    const results = document.getElementById("results");
+    input.value = "";
+    results.innerHTML = "";
+    htmx.trigger(input, "search");
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.querySelector('input[name="q"]');
+    if (searchInput) {
+      searchInput.value = "";
+      htmx.trigger(searchInput, "search");
+    }
+  });
+</script>
+
+{% endblock %}

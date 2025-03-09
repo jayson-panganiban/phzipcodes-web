@@ -18,3 +18,7 @@ body {
     var(--color-secondary) 84.14%
   );
 }
+
+.primary-bg {
+  background-color: var(--color-primary);
+}

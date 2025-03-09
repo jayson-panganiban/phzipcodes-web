@@ -10,7 +10,7 @@ class Settings(BaseModel):
     VERSION: Final[str] = "1.0.0"
 
     # Security settings
-    ALLOWED_HOSTS: list[str] = [""]
+    ALLOWED_HOSTS: list[str] = ["*"]
     CORS_ORIGINS: list[str] = ["*"]
     SECURITY_HEADERS: dict[str, str] = {
         "X-Content-Type-Options": "nosniff",

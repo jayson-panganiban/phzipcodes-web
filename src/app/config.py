@@ -4,35 +4,43 @@ from typing import Final
 
 from pydantic import BaseModel
 
-# Simple environment detection
 is_development = os.getenv("APP_ENV", "").lower() in ("dev", "development", "testing")
 
 
-# Base configuration class
 class Settings(BaseModel):
     # App settings
     APP_NAME: Final[str] = "Philippine Zipcodes"
-    VERSION: Final[str] = "1.0.0"
+    VERSION: Final[str] = "0.1.0"
 
     # Security settings - conditionally include localhost
     ALLOWED_HOSTS: list[str] = (
-        ["phzipcodes.com", "www.phzipcodes.com", "localhost", "127.0.0.1"]
+        [
+            "phzipcodes.com",
+            "www.phzipcodes.com",
+            "phzipcodes-web.vercel.app",
+            "localhost",
+            "127.0.0.1",
+        ]
         if is_development
-        else ["phzipcodes.com", "www.phzipcodes.com"]
+        else ["phzipcodes.com", "www.phzipcodes.com", "phzipcodes-web.vercel.app"]
     )
 
     CORS_ORIGINS: list[str] = (
         [
             "https://phzipcodes.com",
             "https://www.phzipcodes.com",
+            "https://phzipcodes-web.vercel.app",
             "http://localhost:8000",
             "http://127.0.0.1:8000",
         ]
         if is_development
-        else ["https://phzipcodes.com", "https://www.phzipcodes.com"]
+        else [
+            "https://phzipcodes.com",
+            "https://www.phzipcodes.com",
+            "https://phzipcodes-web.vercel.app",
+        ]
     )
 
-    # Simplify security headers conditionally
     SECURITY_HEADERS: dict[str, str] = {
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",

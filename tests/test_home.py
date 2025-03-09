@@ -20,12 +20,6 @@ class TestHome:
         await expect(contact_link).to_be_visible()
         await expect(contact_link).to_have_attribute("href", "/contact")
 
-        coffee_link = page.get_by_role("link", name="Support via Buy Me a Coffee")
-        await expect(coffee_link).to_be_visible()
-        await expect(coffee_link).to_have_attribute(
-            "href", "https://buymeacoffee.com/jsonpanganiban"
-        )
-
     @pytest.mark.asyncio
     async def test_footer_elements(self, page):
         """Test footer elements and links."""

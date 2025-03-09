@@ -87,5 +87,5 @@ class TestRegions:
 
         await expect(page).to_have_url(re.compile(r"^.*/provinces\?region=.*"))
         region_select = page.get_by_role("combobox", name="Filter by region")
-        await expect(region_select).to_have_value(region_name)
+        await expect(region_select).to_have_value(region_name.strip())
         await expect(page.get_by_role("list")).to_be_visible()

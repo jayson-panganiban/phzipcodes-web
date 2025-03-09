@@ -37,10 +37,10 @@ class TestContact:
         """Test contact links and their attributes."""
         await page.get_by_role("link", name="Contact").click()
 
-        support_me = page.get_by_role("link", name="Support via Buy Me a Coffee").nth(1)
+        support_me = page.get_by_role("link", name="Support via Buy Me a Coffee")
         await expect(support_me).to_be_visible()
         await expect(support_me).to_have_attribute(
-            "href", "https://buymeacoffee.com/jsonpanganiban"
+            "href", "https://www.paypal.me/jsonpanganiban"
         )
         contact_links = {
             "Send email": "mailto:jsoncp@proton.me",

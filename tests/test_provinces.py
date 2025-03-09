@@ -83,7 +83,7 @@ class TestProvinces:
 
         # Verify URL and page navigation
         await expect(page).to_have_url(
-            re.compile(rf"^.*/municipalities\?province={province_name}")
+            re.compile(rf"^.*/municipalities\?province={province_name.strip()}")
         )
 
         # Verify page heading
@@ -93,7 +93,7 @@ class TestProvinces:
 
         # Verify province is selected in dropdown
         province_select = page.get_by_role("combobox", name="Filter by province")
-        await expect(province_select).to_have_value(province_name)
+        await expect(province_select).to_have_value(province_name.strip())
 
         # Verify municipalities grid is displayed with filtered results
         municipalities_grid = page.get_by_role("list", name="Municipalities list")

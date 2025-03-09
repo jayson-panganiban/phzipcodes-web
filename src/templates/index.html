@@ -176,7 +176,7 @@ city postal codes, municipality zip codes{% endblock %} {% block head %}
     const results = document.getElementById("results");
     input.value = "";
     results.innerHTML = "";
-    htmx.trigger(input, "search");
+    htmx.trigger(input, "keyup");
   };
 
   document.addEventListener("DOMContentLoaded", () => {

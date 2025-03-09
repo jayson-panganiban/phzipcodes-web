@@ -163,3 +163,4 @@ cython_debug/
 .vercel
 
 .python-version
+src/.DS_Store

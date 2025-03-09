@@ -43,7 +43,7 @@ uv pip install -e ".[dev]"
 Start the development server:
 
 ```bash
-uvicorn app.main:app --reload
+APP_ENV=development uvicorn src.app.main:app --reload
 ```
 
 ### Running Tests

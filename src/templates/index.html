@@ -106,6 +106,8 @@ city postal codes, municipality zip codes{% endblock %} {% block head %}
             src="/static/icons/backspace-light.svg"
             class="h-7 w-7 opacity-80"
             loading="eager"
+            fetchpriority="high"
+            alt="Clear search icon"
           />
         </button>
       </div>
@@ -115,6 +117,7 @@ city postal codes, municipality zip codes{% endblock %} {% block head %}
         aria-live="polite"
         role="region"
         aria-label="Search results"
+        class="mt-6 mb-6"
       ></div>
     </div>
 
